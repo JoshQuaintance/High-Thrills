@@ -10,7 +10,7 @@ If you want to run and check out the web application locally, you have to instal
 
 The first thing you need is a Code Editor if you do not have one already. There are a lot of options out there, but what we recommend are [Visual Studio Code](https://code.visualstudio.com)(What we use) or [Atom Code Editor](https://atom.io). Either of these would work fine, but other code editor would work too.
 
-If you have an updated Windows 10 Computer, you are in luck, a script that will set all these up (except, the code editor), all you have to do is run it using the command line. Check [the automatic setup](#automatic-setup-using-script-windows-10) for more details
+If you have an updated Windows 10 Computer, you are in luck, a script that will set all these up (except, the code editor), all you have to do is run it using the command line. Check [the automatic setup](#automatic-setup-using-script---windows-10) for more details
 
 | Software | Version | Additional Notes |
 | - | - | - |
@@ -48,7 +48,7 @@ You want to check out the web application? Here's how:
 
 1. Install the repository by cloning it into your local drive, or downloading the zip file.
 2. [Install necessary softwares and dependencies](#install-necessary-software-and-dependencies) (IMPORTANT)
-   * If you have an updated Windows 10, check[the automatic setup](#automatic-setup-using-script-windows-10) to setup automatically.
+   * If you have an updated Windows 10, check [the automatic setup](#automatic-setup-using-script---windows-10) to setup automatically.
 3. After you're done, open your code editor to the root folder of the application.
 4. Open the terminal
    * VSCode - Open Integrated Terminal using``Ctrl + ` ``
