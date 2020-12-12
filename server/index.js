@@ -25,16 +25,16 @@ if (process.argv.slice(2).indexOf('dev') > -1) {
 
 
 app.all('/', (req, res, next) => {
-	// Anyone can access the API
-	res.header('Access-Control-Allow-Origin', '*');
+  // Anyone can access the API
+  res.header('Access-Control-Allow-Origin', '*');
 
-	// Let any Request Header into the API
-	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-	next();
+  // Let any Request Header into the API
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
 });
 
 app.get('/', (req, res, next) => {
-	res.status(200).sendFile(path.join(publicDir, 'HTML', 'index.html'));
+  res.status(200).sendFile(path.join(publicDir, 'HTML', 'index.html'));
 });
 
 app.get('/:file', (req, res, next) => {
