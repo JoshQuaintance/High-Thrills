@@ -1,0 +1,33 @@
+{
+  "name": "high-thrills-webapp",
+  "version": "0.0.2",
+  "description": "A Theme Park entertainment website",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm i && npm run compile-scss",
+    "start": "concurrently \"start http://localhost:3000\" \"node .\"",
+    "dev:start": "concurrently \"npm run dev:scss\" \"nodemon . dev\" \"start http://localhost:3000\"",
+    "dev:scss": "sass --watch ../public/SCSS:../public/CSS",
+    "prebuild": "npm i",
+    "build": "npm run build:scss",
+    "build:scss": "sass ../public/SCSS/:../public/CSS"
+  },
+  "keywords": [],
+  "author": "Joshua Pelealu, Ryan Strunk",
+  "license": "MIT",
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6",
+    "sass": "^1.30.0",
+    "socket.io": "^3.0.4"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "glob": "^7.1.6"
+  }
+}

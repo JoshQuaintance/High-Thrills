@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Website Icon -->
+  <link rel="shortcut icon" type="image/icon" href="../assets/images/favicon.ico">
+
+  <title>High Thrills | Reservations</title>
+
+  <!-- IconMonstr - SVG Icons -->
+  <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css">
+
+  <!-- Main CSS file -->
+  <link rel="stylesheet" href="../CSS/main.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <section class="menu">
+    <nav class="navbar">
+      <span class="navbar-logo">
+        <img id="nav-logo" src="../assets/images/logo.jpg" alt="Page logo">
+      </span>
+
+      <div class="navbar-items">
+        <ul class="navbar-content">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="reservations.html">Reservations</a></li>
+          <li class="nav-item"><a href="#">Contact</a></li>
+          <li class="nav-item"><a href="#">About</a></li>
+        </ul>
+        <ul class="navbar-registration">
+          <li class="nav-item"><a id="login-btn">Login</a></li>
+          <li class="nav-item"><a id="register-btn">Register</a></li>
+        </ul>
+      </div>
+    </nav>
+
+  </section>
+
+  <section id="backimg" style="height: 100vh; background-color: rgba(70, 69, 69, 0.733)">
+  </section>
+
+  <div class="login-modal hide"></div>
+
+  <div class="login-container hide">
+    <form id="signin-form login-wrapper">
+      <h1 id="title">Login</h1>
+      <!-- <h3 id="title-incorrect">Incorrect Password</h3> -->
+
+      <div class="textbox username">
+        <i class="im im-user-circle" aria-hidden="true"></i>
+        <input type="text" required id="user-name">
+        <div class="underline"></div>
+        <label>Username</label>
+      </div>
+
+      <div class="textbox password">
+        <i class="im im-lock" aria-hidden="true"></i>
+        <input type="password" required id="user-pass" autocomplete="current-password">
+        <div class="underline"></div>
+        <label>Password</label>
+      </div>
+
+      <div class="btn-cont">
+        <input id="back-btn" type="button" class="btn" value="Cancel">
+        <input id="signin-btn" type="submit" class="btn" value="Sign in">
+      </div>
+      
+
+
+    </form>
+  </div>
+
+  
+  <!-- JavaScript Files -->
+
+  <!-- JQuery CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Main JavaScript File -->
+  <script src="../JS/main.js"></script>
+
+</body>
+</html>

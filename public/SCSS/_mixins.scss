@@ -1,0 +1,69 @@
+@mixin d-flex($direction: '', $justify: '', $align: '') {
+	display: flex;
+	flex-direction: unquote($direction);
+	justify-content: unquote($justify);
+	align-items: unquote($align);
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+}
+@mixin fadeIn ($duration: 2s, $delay: 0s, $timing: linear) {
+	animation: $duration fadeIn $delay $timing;
+	opacity: 100%;
+}
+
+@mixin simpleAnim ($property, $val: '', $dur: 2s, $delay: 0s, $timing: linear,) {
+	@if type-of($property) == 'map' {
+		$animName: '';
+
+		@each $prop, $v in $property {
+			$animName: $animName + '_#{$prop}';
+		}
+
+		@if $reverse == 'reverse' {
+			@keyframes animIn#{$animName}_reverse {
+				0% {
+					@each $prop, $v in $property {
+						#{$prop}: $v;
+					}
+				}
+			}
+
+			@each $prop, $v in $property {
+				#{$prop}: 0;
+			}
+
+			animation: $dur animIn#{$animName}_reverse unquote($delay) unquote($timing);
+		} @else {
+			@keyframes animIn#{$animName} {
+				0% {
+					@each $prop, $v in $property {
+						#{$prop}: 0;
+					}
+				}
+			}
+
+			@each $prop, $v in $property {
+				#{$prop}: $v;
+			}
+		}
+
+		animation: $dur animIn#{$animName} $delay $timing;
+	} @else {
+		@if $val == '' {
+			@error "Parameter 'val'(value of property) is not defined";
+		}
+
+		@keyframes animIn_#{$property} {
+			0% {
+				#{$property}: 0;
+			}
+		}
+
+		#{$property}: $val;
+		animation: $dur animIn_#{$property} $delay $timing;
+	}
+}

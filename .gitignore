@@ -1,0 +1,8 @@
+.vscode/*
+
+# Local History for Visual Studio Code
+.history/
+
+2020-2021 S-PS WSAP Release.pdf
+*.env
+node_modules

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>High Thrills | Login</title>
+
+  <!-- IconMonstr - SVG Icons -->
+  <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css">
+
+  <link rel="stylesheet" href="../css/login.css">
+
+</head>
+
+<body>
+
+  <div class="login-container">
+    <form id="signin-form login-wrapper" autocomplete="off">
+      <h1 id="title">Login to High Thrills</h1>
+      <!-- <h3 id="title-incorrect">Incorrect Password</h3> -->
+
+      <div class="textbox username">
+        <i class="im im-user-circle" aria-hidden="true"></i>
+        <input type="text" required id="user-name">
+        <div class="underline"></div>
+        <label>Username or Email<span class="required">*</span></label>
+      </div>
+
+      <!-- <div class="textbox email">
+        <i class="im im-mail" aria-hidden="true"></i>
+        <input type="email" required id="user-email">
+        <div class="underline"></div>
+        <label>Email<span class="required">*</span></label>
+      </div> -->
+
+
+      <div class="textbox password">
+        <i class="im im-lock" aria-hidden="true"></i>
+        <input type="password" required id="user-pass" autocomplete="current-password">
+        <div class="underline"></div>
+        <label>Password<span class="required">*</span></label>
+      </div>
+
+      <!-- <div class="textbox password-verify">
+        <i class="im im-check-mark-circle" aria-hidden="true"></i>
+        <input type="password" required id="user-pass-verfiy" autocomplete="current-password">
+        <div class="underline"></div>
+        <label>Re-Enter Password<span class="required">*</span></label>
+      </div> -->
+
+      <div class="btn-cont">
+        <input id="back-btn" type="button" class="btn" value="Cancel">
+        <input id="signin-btn" type="submit" class="btn" value="Sign in">
+      </div>
+      
+
+
+    </form>
+  </div>
+</body>
+</html>

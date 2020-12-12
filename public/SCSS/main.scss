@@ -1,0 +1,155 @@
+@import './_mixins';
+@import '_variables';
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 300vh;
+}
+
+#backimg {
+	width: 100%;
+	height: 100vh;
+	filter: brightness(50%);
+	z-index: -1;
+}
+
+input:focus {
+	outline: none;
+}
+
+.menu {
+	z-index: 9;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	background-color: rgb(255, 255, 255);
+	opacity: 1;
+	border-bottom: 1px solid #e6e6e6;
+	height: 80px;
+	transition: height .3s ease, opacity .3s ease;
+
+	&.scrolled {
+		height: 70px;
+		opacity: .9;
+		transition: height .3s ease, opacity .3s ease;
+		border-bottom: none;
+
+		#nav-logo {
+			height: 3.0rem !important;
+			transition: height .3s ease;
+		}
+
+		.navbar-items {
+			margin-left: 5px !important;
+			transition: margin-left .3s ease;
+		}
+	}
+
+	.navbar {
+		@include d-flex(row, center, center);
+
+		height: 100%;
+
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		li {
+			// position: relative;
+			// display: flex;
+			// align-items: center;
+			// height: auto !important;
+			list-style-type: none;
+			// transition: color .3s ease;
+			cursor: pointer;
+
+			a {
+				@include d-flex('', center, center);
+
+				position: relative;
+				margin: auto;
+				font-size: 1.2rem;
+				margin: .667em 1em !important;
+			}
+
+			a::after {
+				content: '';
+				position: absolute;
+				bottom: -2px;
+				width: 100%;
+				border: 2px solid $main-blue;
+				width: 0;
+				opacity: 0;
+				border-radius: 15px;
+				transition: opacity .3s ease, width .3s ease;
+			}
+
+			&:hover {
+				color: $main-blue;
+				transition: color .3s ease;
+
+				a::after {
+					width: 100%;
+					opacity: 1;
+					transition: opacity .3s ease, width .3s ease;
+				}
+			} // &::hover
+		} // li
+
+		#nav-logo {
+			height: 4.4rem;
+			transition: height .3s ease;
+		}
+
+		.navbar-items {
+			@include d-flex(row, space-between);
+
+			margin-left: 25px;
+			position: relative;
+			width: 100%;
+			transition: margin-left .3s ease;
+
+			a {
+				font-family: 'Jost', cursive;
+				font-weight: bold;
+				font-size: 1.3rem;
+				font-style: normal;
+				letter-spacing: 1px;
+			}
+
+			.navbar-content {
+				@include d-flex(row, $align: center);
+
+				// width: 75%;
+			}
+
+			.navbar-registration {
+				@include d-flex(row, flex-end, center);
+
+				position: absolute;
+				right: 0;
+				height: 100%;
+				width: 25%;
+			}
+		} // .navbar-items
+	} // .navbar
+} // .menu
+
+/* LOGIN BOX */
+.login-modal {
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(1.5px);
+	transition: background-color .3s ease-in-out;
+} // .login-modal
+

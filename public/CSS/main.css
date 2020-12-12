@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Langar&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+}
+:root {
+  --text-color-danger: #cb2431;
+  --main-blue: #42a2d1;
+  --login-object-theme: #000;
+  --login-text-theme: #000;
+  --link-text-color: #0366d6;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 300vh;
+}
+
+#backimg {
+  width: 100%;
+  height: 100vh;
+  filter: brightness(50%);
+  z-index: -1;
+}
+
+input:focus {
+  outline: none;
+}
+
+.menu {
+  z-index: 9;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: white;
+  opacity: 1;
+  border-bottom: 1px solid #e6e6e6;
+  height: 80px;
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+.menu.scrolled {
+  height: 70px;
+  opacity: 0.9;
+  transition: height 0.3s ease, opacity 0.3s ease;
+  border-bottom: none;
+}
+.menu.scrolled #nav-logo {
+  height: 3rem !important;
+  transition: height 0.3s ease;
+}
+.menu.scrolled .navbar-items {
+  margin-left: 5px !important;
+  transition: margin-left 0.3s ease;
+}
+.menu .navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.menu .navbar a {
+  text-decoration: none;
+  color: inherit;
+}
+.menu .navbar li {
+  list-style-type: none;
+  cursor: pointer;
+}
+.menu .navbar li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: auto;
+  font-size: 1.2rem;
+  margin: 0.667em 1em !important;
+}
+.menu .navbar li a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+  border: 2px solid var(--main-blue);
+  width: 0;
+  opacity: 0;
+  border-radius: 15px;
+  transition: opacity 0.3s ease, width 0.3s ease;
+}
+.menu .navbar li:hover {
+  color: var(--main-blue);
+  transition: color 0.3s ease;
+}
+.menu .navbar li:hover a::after {
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease, width 0.3s ease;
+}
+.menu .navbar #nav-logo {
+  height: 4.4rem;
+  transition: height 0.3s ease;
+}
+.menu .navbar .navbar-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 25px;
+  position: relative;
+  width: 100%;
+  transition: margin-left 0.3s ease;
+}
+.menu .navbar .navbar-items a {
+  font-family: "Jost", cursive;
+  font-weight: bold;
+  font-size: 1.3rem;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+.menu .navbar .navbar-items .navbar-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.menu .navbar .navbar-items .navbar-registration {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 25%;
+}
+
+/* LOGIN BOX */
+.login-modal {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(1.5px);
+  transition: background-color 0.3s ease-in-out;
+}
+
+/*# sourceMappingURL=main.css.map */

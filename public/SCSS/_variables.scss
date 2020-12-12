@@ -1,0 +1,25 @@
+// 'Jost', sans-serif
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
+// 'Langar', cursive
+@import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
+
+// 'Oxygen', cursive
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
+// 'Ubuntu', sans-serif
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+:root {
+  --text-color-danger: #cb2431;
+  --main-blue: #42a2d1;
+  --login-object-theme: #000;
+  --login-text-theme: #000;
+  --link-text-color: #0366d6;
+}
+
+$link-text-color: var(--link-text-color);
+$login-object-theme: var(--login-object-theme);
+$login-text-theme: var(--login-text-theme);
+$main-blue: var(--main-blue);
+$danger-red: var(--text-color-danger);

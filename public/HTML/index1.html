@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Website Icon  -->
+    <link rel="shortcut icon" type="image/icon" href="../assets/images/favicon.ico" />
+    
+    <title>High Thrills - Home</title>
+    
+    <link rel="stylesheet" href="../CSS/main.css"/>
+</head>
+
+<body>
+    <nav class="navbar">
+        <!-- Page Logo
+        <img src="../assets/images/logo.jpg" alt="Logo"> -->
+        <!-- create  navbar-->
+        <ul>
+            <li class="nav-item logo"><img src="../assets/images/logo.jpg" alt="Page Logo"></li>
+            <li class="nav-item"><a class="active" href="home.html">Home</a></li>
+            <li class="nav-item"><a href="reservations.html">Reservations</a></li>
+            <li class="nav-item"><a href="contact.asp">Contact</a></li>
+            <li class="nav-item"><a href="about.asp">About</a></li>
+            <li class="nav-item loginregister"><a id="register-btn" style="width:auto;">Register</a></li>
+            <li class="nav-item loginregister"><a id="login-btn" style="width:auto;">Login</a></li>
+
+        </ul>
+    </nav>
+
+    <!--create login box-->
+    <div id="id01" class="modal">
+
+      <form class="modal-content animate" action="/action_page.php" method="post">
+
+      <div class="imgcontainer">
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Login">&times;</span>
+          <img src="images/logo.jpg" alt="LoginLogo" class="loginlogo">
+      </div>
+
+      <div class="logincontainer">
+        <h1>Login</h1>
+        <p>Please enter your High Thrills username and password.</p>
+        <hr>
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter your username" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter your password" name="psw" required>
+        <hr>
+        <button type="submit">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+    </div>
+
+    <div class="logincontainer" style="background-color:#f1f1f1">
+        <button type="button" class="cancelbtn" id="login-cancel">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+    </form>
+    </div>
+
+
+
+
+    <!--create register box-->
+    <div id="register01" class="register hide">
+
+    <form class="register-content animate" action="/action_page.php" method="post">
+
+    <div class="imgcontainer">
+        <span onclick="document.getElementById('register01').style.display='none'" class="close" title="Close Login">&times;</span>
+        <img src="images/logo.jpg" alt="LoginLogo" class="loginlogo">
+    </div>
+    <div class="registercontainer">
+    <h1>Register</h1>
+    <p>Please create a username and password.</p>
+    <hr>
+
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter a username" name="username" id="username" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+    <hr>
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+    <button type="submit" class="registerbtn">Register</button>
+    </div>
+
+    <div class="registercontainer signin">
+    <p>Already have an account? <a href="#">Sign in</a>.</p>
+    </div>
+    </div>
+    </form>
+    </div>
+
+
+    <!-- JavaScript Files -->
+    
+    <!-- JQuery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Main JavaScript File -->
+    <script src="../JS/main.js"></script>
+
+    <!---->
+</body>
+</html>
