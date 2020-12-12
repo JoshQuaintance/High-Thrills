@@ -4,6 +4,21 @@
 
 A Web Application for High Thrills Entertainment.
 
+## Getting Started
+
+You want to check out the web application? Here's how:
+
+1. Install the repository by cloning it into your local drive, or downloading the zip file.
+2. [Install necessary softwares and dependencies](#install-necessary-software-and-dependencies) (IMPORTANT)
+   * If you have an updated Windows 10, check[the automatic setup](#automatic-setup-using-script---windows-10) to setup automatically.
+3. After you're done, open your code editor to the root folder of the application.
+4. Open the terminal
+   * VSCode - Open Integrated Terminal using``Ctrl + ` ``
+   * If your code editor does not have an Integrated Terminal, then open a Command Prompt/Terminal Instance in the folder.
+5. Make sure you are in the`/server` directory. If you're not in it, just use`cd server`.
+6. To check out the web app, type in`npm run start` in the terminal, and wait until a browser is open. Click refresh in the browser until it shows the page.
+7. Congrats, you have configured your computer to open this web application!
+
 ## Install Necessary Software and Dependencies
 
 If you want to run and check out the web application locally, you have to install some of these software and dependencies. Some of them are marked for development only, which means it will only be needed if you are changing something in the site.
@@ -28,8 +43,12 @@ Here are the dependencies needed to run the web applications, you can install it
 | [concurrently](https://www.npmjs.com/package/concurrently) | `^5.3.x` | Script to run multiple commands concurrently. It's purpose is to run multiple commands that continuously runs until stopped. |
 | *[cheerio](https://www.npmjs.com/package/cheerio)** | `^1.0.x` | A Markup DOM parser to inject Socket.io using a script tag into the html file. |
 | *[nodemon](https://www.npmjs.com/package/nodemon)** | `^2.0.x` | Script that helps with the development of the server-side code that will automatically restart a node instance everytime a file change occurs. |
-| *[SASS](https://www.npmjs.com/package/sass)** | `^1.30.x` | Syntatically Awesome Style Sheets (SASS) is a compiler for the CSS pre-processor SASS/SCSS. It is needed to compile SCSS files to style the website. |
+| *[node-sass](https://www.npmjs.com/package/node-sass)** | `^1.30.x` | Syntatically Awesome Style Sheets (SASS). This is a compiler for the CSS pre-processor SASS/SCSS. It is needed to compile SCSS files to style the website. |
 | *[socket.io](https://www.npmjs.com/package/socket.io)** | `^3.0.x` | Package that allows real-time bidirectional (browser to server, and vice versa) event-based communication. It is need for the development environment that is used for hot reloading the web app. |
+| *[PostCSS](https://www.npmjs.com/package/postcss)** | `^8.2.x` | Tool for transforming styles using JS plugins. |
+| [PostCSS CLI](https://www.npmjs.com/package/postcss-cli) | `8.3.x` | Client to use PostCSS plugins to transform styles. Needed for autoprefixer. |
+| *[autoprefixer](https://www.npmjs.com/package/autoprefixer)** | `^10.1.x` | PostCSS Plugin that parses CSS and add vendor prefixes (-webkit-, -moz-, -o-, -ms-, etc.) to CSS rules using the[Can I use](https://caniuse.com/) values. It makes sure the CSS used will be compatible to most browsers. |
+| *[onchange](https://www.npmjs.com/package/onchange)** | `^7.1.x` | Script used to watch file changes and run a script everytime there is a change to specific files. In this case, in development environment it checks if there is SCSS file changes. |
 
 **Development Only (Not required to view the web app)*
 
@@ -42,17 +61,15 @@ Here are the dependencies needed to run the web applications, you can install it
 5. Let the script do the job and wait.
 6. After it's done, you are set and ready to run the web app.
 
-## Getting Started
+## NPM Scripts
 
-You want to check out the web application? Here's how:
+NPM scripts are scripts that can be executed in the terminal to compile code and run commands. You would run an npm script like `npm run <script-name>`There are a few npm scripts in this app, here are all of them:
 
-1. Install the repository by cloning it into your local drive, or downloading the zip file.
-2. [Install necessary softwares and dependencies](#install-necessary-software-and-dependencies) (IMPORTANT)
-   * If you have an updated Windows 10, check [the automatic setup](#automatic-setup-using-script---windows-10) to setup automatically.
-3. After you're done, open your code editor to the root folder of the application.
-4. Open the terminal
-   * VSCode - Open Integrated Terminal using``Ctrl + ` ``
-   * If your code editor does not have an Integrated Terminal, then open a Command Prompt/Terminal Instance in the folder.
-5. Make sure you are in the`/server` directory. If you're not in it, just use`cd server`.
-6. To check out the web app, type in`npm run start` in the terminal, and wait until a browser is open. Click refresh in the browser until it shows the page.
-7. Congrats, you have configured your computer to open this web application!
+| Scripts | Usage |
+| :-: | :-: |
+| `setup` | Runs npm install to install all dependencies and run the `build:prefix` script |
+| `start` | Runs the `build:prefix` script then concurrently open a browser to `localhost:3000` and use node to run the index.js file |
+| `dev:start` | Concurrently run the `dev:scss` script, `nodemon . dev` (the dev argument is for hot reloading in development environment), and open a browser to `localhost:3000` |
+| `dev:scss` | Watches inside the SCSS directory, it will run the `build:prefix` script everytime there is a change on any of the files in the SCSS directory |
+| `build:scss` | Runs the `node-sass` command getting all the SCSS files and compile it into the CSS directory with it's source map |
+| `build:prefix` | Runs the `build:scss` script and then run the PostCSS getting all the CSS files and use the `autoprefixer` plugin to add vendor prefixes |
