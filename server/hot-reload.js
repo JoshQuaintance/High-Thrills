@@ -2,7 +2,6 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
-const { connect } = require('http2');
 
 const rootDir = path.join(path.dirname(__dirname));
 const publicDir = path.join(rootDir, 'public');
@@ -17,7 +16,6 @@ function makeNode(file) {
 	let comment = `<!-- Javascript file to talk to server with Socket.io -->`;
 	let scriptNode = $('<script>').append(`
   let listen = \`ws://\${window.location.hostname}:5050\`;
-  console.log(listen)
   const socket = io(listen);
   socket.on('connection', () => {
     console.log('Connection with Server Established');
