@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
-const injectSocket = require('./hotreload.js');
+const injectSocket = require('./hot-reload.js');
 const glob = require('glob');
 
 const rootDir = path.join(path.dirname(__dirname));
@@ -16,6 +16,8 @@ app.use(cookieParser()); // Cookie Parser - Read Cookies from server
 app.use(express.json()); // JSON Middleware - Parse JSON in server
 app.listen(3000);
 
+// Routing for database connection
+require('./db-handler.js')(app);
 
 if (process.argv.slice(2).indexOf('dev') > -1) {
   injectSocket(app);
