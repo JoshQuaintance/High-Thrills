@@ -6,3 +6,5 @@
 2020-2021 S-PS WSAP Release.pdf
 *.env
 node_modules
+firebaseconfig.txt
+high-thrills-firebase-adminsdk.json
