@@ -40,6 +40,8 @@ Here are the dependencies needed to run the web applications, you can install it
 | [cors](https://www.npmjs.com/package/cors) | `^2.8.x` | Cross Origin Resource Sharing (CORS) an express middleware allowing specific url to be able to talk with the API. |
 | [cookie-parser](https://www.npmjs.com/package/cookie-parser) | `^1.4.x` | Express middleware allowing the back-end server to parse the cookie string from the browser. |
 | [glob](https://www.npmjs.com/package/glob) | `^7.1.x` | File matching package that allows the server to check if files/directory exist. |
+| [firebase](https://www.npmjs.com/package/firebase) | `^8.2.x` | Tools to that allows authentication using OAuth so users can use authentication providers like Google, Facebook, etc. It is also used as a database. |
+| [firebase-admin](https://www.npmjs.com/package/firebase-admin) | `^9.4.x` | An SDK that lets the server have admin access to the database. |
 | [concurrently](https://www.npmjs.com/package/concurrently) | `^5.3.x` | Script to run multiple commands concurrently. It's purpose is to run multiple commands that continuously runs until stopped. |
 | *[cheerio](https://www.npmjs.com/package/cheerio)** | `^1.0.x` | A Markup DOM parser to inject Socket.io using a script tag into the html file. |
 | *[nodemon](https://www.npmjs.com/package/nodemon)** | `^2.0.x` | Script that helps with the development of the server-side code that will automatically restart a node instance everytime a file change occurs. |
