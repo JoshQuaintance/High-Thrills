@@ -11,7 +11,7 @@ function incorrectInput(element) {
 	} else {
     
     let incorrectEl = $(`<h3> ${titleCased} Incorrect </h3>`).attr('id', 'title-incorrect')
-    $('.input-container').prepend(incorrectEl);
+    $(incorrectEl).insertAfter('.login-provider')
 	}
 
 	elementUnderline.addClass('incorrect');
@@ -29,6 +29,24 @@ function incorrectInput(element) {
 		animation   : 'shake .82s'
 	});
 }
+
+/* Firebase - Typically used here  for signing in using providers */
+const firebaseConfig = {
+  apiKey: "AIzaSyAw-zFeGnwfSiET2gZrZaVZebnZyajeR4Q",
+  authDomain: "high-thrills.firebaseapp.com",
+  projectId: "high-thrills",
+  storageBucket: "high-thrills.appspot.com",
+  messagingSenderId: "365192472687",
+  appId: "1:365192472687:web:cea4c3c565845ce5ae459a",
+  measurementId: "G-2DJXH2BFMT"
+};
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const googleAuth = new firebase.auth.GoogleAuthProvider();
+const facebookAuth = new firebase.auth.FacebookAuthProvider();
+
+/* END */
 
 // When an enter key is pressed in the password,
 // it will click the sign in button
