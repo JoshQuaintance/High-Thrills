@@ -1,44 +1,44 @@
 function incorrectInput(element) {
-	const Parent = $(`.textbox.${element}`);
-	let elementIcon = Parent.find('.im');
-	let elementUnderline = Parent.find('.underline');
-	let elementInput = Parent.find('input');
-  let inputLabel = Parent.find('label');
-  let titleCased = element.toString().slice(0,1).toUpperCase() + element.toString().slice(1);
+	const Parent = document.querySelector(`.textbox.${element}`);
+	let elementIcon = Parent.querySelector('.im');
+	let elementUnderline = Parent.querySelector('.underline');
+	let elementInput = Parent.querySelector('input');
+	let inputLabel = Parent.querySelector('label');
+	let titleCased = element.toString().slice(0, 1).toUpperCase() + element.toString().slice(1);
 
-	if ($('#title-incorrect').length) {
-		$('#title-incorrect').text(`${titleCased} Incorrect`);
+	if (!document.querySelector('#title-incorrect')) {
+		document.querySelector('#title-incorrect').textContent(`${titleCased} Incorrect`);
 	} else {
-    
-    let incorrectEl = $(`<h3> ${titleCased} Incorrect </h3>`).attr('id', 'title-incorrect')
-    $(incorrectEl).insertAfter('.login-provider')
+		let incorrectEl = document.createElement('h3');
+		incorrectEl.textContent(`${titleCased} Incorrect`);
+		incorrectEl.setAttribute('id', 'title-incorrect');
+		document.querySelector('.login-provider').insertAdjacentElement('afterend');
 	}
 
-	elementUnderline.addClass('incorrect');
-	inputLabel.addClass('incorrect');
-	elementIcon.addClass('incorrect');
+	elementUnderline.classList.add('incorrect');
+	inputLabel.classList.add('incorrect');
+	elementIcon.classList.add('incorrect');
 
 	setTimeout(() => {
-		elementUnderline.removeClass('incorrect');
-		inputLabel.removeClass('incorrect');
-		elementIcon.removeClass('incorrect');
-		elementInput.removeClass('incorrect').removeAttr('style');
-	}, 820);
-	elementInput.css({
-		borderColor : 'red',
-		animation   : 'shake .82s'
-	});
+		elementUnderline.classList.remove('incorrect');
+		inputLabel.classList.remove('incorrect');
+		elementIcon.classList.remove('incorrect');
+    elementInput.classList.remove('incorrect');
+    elementInput.setAttribute('style', '');
+  }, 820);
+  elementInput.style.borderColor = 'red';
+  elementInput.style.animation = 'shake';
 }
 
 /* Firebase - Typically used here  for signing in using providers */
 const firebaseConfig = {
-  apiKey: "AIzaSyAw-zFeGnwfSiET2gZrZaVZebnZyajeR4Q",
-  authDomain: "high-thrills.firebaseapp.com",
-  projectId: "high-thrills",
-  storageBucket: "high-thrills.appspot.com",
-  messagingSenderId: "365192472687",
-  appId: "1:365192472687:web:cea4c3c565845ce5ae459a",
-  measurementId: "G-2DJXH2BFMT"
+	apiKey            : 'AIzaSyAw-zFeGnwfSiET2gZrZaVZebnZyajeR4Q',
+	authDomain        : 'high-thrills.firebaseapp.com',
+	projectId         : 'high-thrills',
+	storageBucket     : 'high-thrills.appspot.com',
+	messagingSenderId : '365192472687',
+	appId             : '1:365192472687:web:cea4c3c565845ce5ae459a',
+	measurementId     : 'G-2DJXH2BFMT'
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -50,17 +50,15 @@ const facebookAuth = new firebase.auth.FacebookAuthProvider();
 
 // When an enter key is pressed in the password,
 // it will click the sign in button
-$('#user-pass').on('keypress', function(e) {
-	if (e.key == 'Enter') {
-		$('#signin-btn').click();
-  }
-  
+document.querySelector('#user-pass').addEventListener('keypress', function(e) {
+  if (e.key == 'Enter') document.querySelector('#signin-btn').click();
 });
 
-$('#back-btn').click(() => {
-  window.location.href = window.location.origin;
-})
+// When the home button is clicked, it will
+// redirect to origin url
+document.querySelector('#back-btn').onclick = () => window.location.href = window.location.origin;
 
-$('form').submit((e) => {
-  e.preventDefault();
-})
+// When the form is submitted, it prevents the default action
+// which runs the action given to it, instead runs a specific function
+// that will connect to the DB
+document.querySelector('form').onsubmit = e => e.preventDefault();

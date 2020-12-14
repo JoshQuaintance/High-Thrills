@@ -79,7 +79,7 @@ const injectSocket = app => {
 
 	// Watch for the public directory and the subdirectories inside it if there is any changes
 	fs.watch(path.join(publicDir), { recursive: true }, (e, filename) => {
-    if (e != 'change') return;
+		if (e != 'change') return;
 		console.log(`Restarting due to changes in ${filename}`);
 		// If there is changes, do a countdown, then emit to socket to update the page by reloading.
 		executeAfterCountdown(() => {
