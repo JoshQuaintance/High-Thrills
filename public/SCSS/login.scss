@@ -25,30 +25,82 @@ body {
 	position: relative;
 	padding: 30px 25px;
 	border-radius: 15px;
-	background-color: rgb(246, 248, 250);
+	background-color: rgba(246, 248, 250, .85);
 	border: 1px solid rgba(128, 128, 128, 0.514);
 	box-shadow: 2px 3px 15px rgba(128, 128, 128, 0.74);
 	width: 360px;
 	height: 600px;
 	padding-bottom: 15px;
-  padding-top: 15px;
-  
-  // .login-provider {
-  //   @include d-flex(column, center, flex-start);
+	padding-top: 15px;
 
-  //   width: 100%;
-  //   position: relative;
-  //   text-align: left;
-  //   flex-wrap: wrap;
-    
-  //   #sign-in-with-provider {
-  //     .auth-container {
-  //       span.sign-in-auth {
-  //         letter-spacing: 1px;
-  //       }
-  //     }
-  //   }
-  // }// .login-provider
+	.login-provider {
+		@include d-flex(column, center, flex-start);
+
+		width: 100%;
+		position: relative;
+		text-align: left;
+		flex-wrap: wrap;
+
+		#title h3 {
+      font-size: 15px;
+      text-align: center;
+		}
+
+		#sign-in-with-provider {
+      @include d-flex(row, space-around, left);
+
+      width: 100%;
+      flex-wrap: wrap;
+			margin-top: 10px;
+
+			.auth-container {
+        background-color: white;
+        opacity: .95;
+				border-radius: 3px;
+        padding: 7.5px 15px;
+        padding-left: 10px;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+        cursor: pointer;
+        font-weight: 500;
+        width: 130px;
+
+				transition: all .3s ease;
+
+				&[data-auth-provider=google] {
+          color: grey;
+          // font-size: 20px !important;
+
+          &:hover {
+            color: black !important;
+            border-color: black;
+            filter: brightness(96%);
+            transition: all .3s ease;
+          }
+        } // google
+
+        &[data-auth-provider=facebook] {
+          background-color: #3b5998;
+          color: white;
+
+          &:hover {
+            filter: brightness(115%);
+          }
+        }// facebook
+
+				span.sign-in-auth {
+					@include d-flex(row, flex-start, center);
+
+					letter-spacing: 1px;
+
+					img {
+						margin-right: 10px;
+						width: auto;
+						height: 23px;
+					}
+				} // span.sign-in-auth
+			} // auth-container
+		} // #sign-in-with-provider
+	} // .login-provider
 
 	.forgot-container {
 		@include fadeIn(1s);
@@ -83,8 +135,7 @@ body {
 	height: 50px;
 	margin-top: 5px;
 	border-radius: 15px;
-	background-color: rgb(246, 248, 250);
-	opacity: 85%;
+	background-color: rgba(246, 248, 250, .85);
 	border: 1px solid rgba(128, 128, 128, 0.514);
 
 	a {
@@ -104,7 +155,6 @@ body {
 	position: relative;
 	overflow: hidden;
 	z-index: 10;
-	opacity: 87%;
 	border-radius: 7px;
 	width: 390px;
 	height: auto;

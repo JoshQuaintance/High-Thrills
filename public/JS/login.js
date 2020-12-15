@@ -41,12 +41,27 @@ const firebaseConfig = {
 	measurementId     : 'G-2DJXH2BFMT'
 };
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 const auth = firebase.auth();
 const googleAuth = new firebase.auth.GoogleAuthProvider();
 const facebookAuth = new firebase.auth.FacebookAuthProvider();
 
 /* END */
+
+// Google Sign-in
+document.querySelector('[data-auth-provider=google]').onclick = () => {
+  auth.signInWithPopup(googleAuth).then(user => {
+    alert(user + " has signed in using google")
+  }).catch(err => console.error(err))
+}
+
+// Facebook Sign-in
+document.querySelector('[data-auth-provider=facebook]').onclick = () => {
+  auth.signInWithPopup(facebookAuth).then(user => {
+    alert(user + " has signed in using facebook")
+  }).catch(err => console.error(err));
+}
 
 // When an enter key is pressed in the password,
 // it will click the sign in button

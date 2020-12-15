@@ -23,18 +23,26 @@
 
       <div class="input-container">
 
-        <!-- <div class="login-provider">
+        <div class="login-provider">
           <span id="title">
-            <h3>Login using any of these?</h3>
+            <h3>Login using any of these providers: </h3>
           </span>
           <section id="sign-in-with-provider">
             <div class="auth-container" data-auth-provider="google">
-              <img src="../assets/brand-icons/google.svg" alt="Logo" id="google-logo">
-              <span type="button" role="button" class="sign-in-auth">Google</span>
+              <span type="button" role="button" class="sign-in-auth">
+                <img src="../assets/brand-icons/google.svg" alt="Logo" id="google-logo">
+                Google
+              </span>
+            </div>
+            <div class="auth-container" data-auth-provider="facebook">
+              <span type="button" role="button" class="sign-in-auth">
+                <img src="../assets/brand-icons/facebook.svg" alt="">
+                Facebook
+              </span>
             </div>
           </section>
 
-        </div> -->
+        </div>
         <!-- <h3 id="title-incorrect"> Password Incorrect </h3> -->
 
         <div class="textbox username">
@@ -73,6 +81,8 @@
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
+
 
   <!-- Main JS -->
   <script src="../JS/login.js"></script>
