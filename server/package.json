@@ -8,6 +8,8 @@
     "start": "npm run build:prefix && concurrently \"start http://localhost:3000\" \"node .\"",
     "dev:start": "concurrently \"npm run dev:scss\" \"nodemon . dev\" \"start http://localhost:3000\"",
     "dev:scss": "onchange \"../public/SCSS/*.scss\" -- npm run build:prefix",
+    "dev:db": "nodemon . emulator",
+    "dev:emulators": "cd firebase && firebase emulators:start",
     "build:scss": "node-sass --recursive --output-style expanded --output ../public/CSS --source-map true --source-map-contents ../public/SCSS",
     "build:prefix": "npm run build:scss && postcss ../public/CSS/*.css --replace --use=autoprefixer"
   },
