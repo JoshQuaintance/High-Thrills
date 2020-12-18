@@ -69,7 +69,8 @@ document.querySelector('[data-auth-provider=facebook]').onclick = () => {
 		.catch(err => console.error(err));
 };
 
-document.querySelector('#signin-form').onsubmit = () => {
+
+document.querySelector('form').onsubmit = () => {
 	let username = document.querySelector('#user-name').value;
 	let password = document.querySelector('#user-pass').value;
 
