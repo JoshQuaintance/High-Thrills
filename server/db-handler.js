@@ -1,10 +1,11 @@
 const firebase = require('firebase/app');
 const admin = require('firebase-admin');
 const serviceAccount = require('./firebase/high-thrills-firebase-adminsdk.json');
+const bcrypt = require('bcrypt');
+
 // Add Firebase products individually
 require('firebase/auth');
 require('firebase/firestore');
-process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080';
 
 const firebaseConfig = {
 	apiKey            : 'AIzaSyAw-zFeGnwfSiET2gZrZaVZebnZyajeR4Q',
@@ -17,26 +18,22 @@ const firebaseConfig = {
 };
 
 admin.initializeApp({
-	credential  : admin.credential.cert(serviceAccount)
+	credential : admin.credential.cert(serviceAccount)
 });
 
-// firebase.initializeApp();
-
 const db = admin.firestore();
-if (process.argv.slice(2).indexOf('emulator') > -1) 
-  // db.useEmulator("localhost", 8080)
 
 module.exports = function dbConnection(app) {
-  app.post('/login', async (req, res) => {
-    console.log(req.body, db);
-    const userRef = db.collection('users');
-    const user = await userRef.get();
-    user.forEach(doc => {
-      console.log(doc.id, '=> ', doc.data());
-      res.send(doc.data())
-    })
+	app.post('/join', async (req, res) => {
+		let signUpEntry = JSON.parse(req.body);
+		console.log(signUpEntry);
 
+		// try {
+		//     const hashedPassword = await bcrypt.hash(signUpEntry.password)
+		// }
+	});
 
-
-  })
+	app.post('/login', async (req, res) => {
+		let loginEntry = JSON.parse(req.body);
+	});
 };

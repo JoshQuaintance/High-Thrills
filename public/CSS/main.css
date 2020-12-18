@@ -2,11 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Langar&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-}
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -24,8 +19,7 @@
 * {
   padding: 0;
   margin: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -35,8 +29,7 @@ body {
 #backimg {
   width: 100%;
   height: 100vh;
-  -webkit-filter: brightness(50%);
-          filter: brightness(50%);
+  filter: brightness(50%);
   z-index: -1;
 }
 
@@ -53,44 +46,31 @@ input:focus {
   opacity: 1;
   border-bottom: 1px solid #e6e6e6;
   height: 80px;
-  -webkit-transition: height .3s ease, opacity .3s ease;
   transition: height .3s ease, opacity .3s ease;
 }
 
 .menu.scrolled {
   height: 70px;
   opacity: .9;
-  -webkit-transition: height .3s ease, opacity .3s ease;
   transition: height .3s ease, opacity .3s ease;
   border-bottom: none;
 }
 
 .menu.scrolled #nav-logo {
   height: 3.0rem !important;
-  -webkit-transition: height .3s ease;
   transition: height .3s ease;
 }
 
 .menu.scrolled .navbar-items {
   margin-left: 5px !important;
-  -webkit-transition: margin-left .3s ease;
   transition: margin-left .3s ease;
 }
 
 .menu .navbar {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
@@ -105,15 +85,9 @@ input:focus {
 }
 
 .menu .navbar li a {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   position: relative;
   margin: auto;
   font-size: 1.2rem;
@@ -129,44 +103,32 @@ input:focus {
   width: 0;
   opacity: 0;
   border-radius: 15px;
-  -webkit-transition: opacity .3s ease, width .3s ease;
   transition: opacity .3s ease, width .3s ease;
 }
 
 .menu .navbar li:hover {
   color: var(--main-blue);
-  -webkit-transition: color .3s ease;
   transition: color .3s ease;
 }
 
 .menu .navbar li:hover a::after {
   width: 100%;
   opacity: 1;
-  -webkit-transition: opacity .3s ease, width .3s ease;
   transition: opacity .3s ease, width .3s ease;
 }
 
 .menu .navbar #nav-logo {
   height: 4.4rem;
-  -webkit-transition: height .3s ease;
   transition: height .3s ease;
 }
 
 .menu .navbar .navbar-items {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
   margin-left: 25px;
   position: relative;
   width: 100%;
-  -webkit-transition: margin-left .3s ease;
   transition: margin-left .3s ease;
 }
 
@@ -179,32 +141,16 @@ input:focus {
 }
 
 .menu .navbar .navbar-items .navbar-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  align-items: center;
 }
 
 .menu .navbar .navbar-items .navbar-registration {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
   position: absolute;
   right: 0;
   height: 100%;
@@ -219,9 +165,8 @@ input:focus {
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
-  -webkit-backdrop-filter: blur(1.5px);
-          backdrop-filter: blur(1.5px);
-  -webkit-transition: background-color .3s ease-in-out;
+  backdrop-filter: blur(1.5px);
   transition: background-color .3s ease-in-out;
 }
+
 /*# sourceMappingURL=main.css.map */

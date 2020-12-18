@@ -23,11 +23,11 @@ function incorrectInput(element) {
 		elementUnderline.classList.remove('incorrect');
 		inputLabel.classList.remove('incorrect');
 		elementIcon.classList.remove('incorrect');
-    elementInput.classList.remove('incorrect');
-    elementInput.setAttribute('style', '');
-  }, 820);
-  elementInput.style.borderColor = 'red';
-  elementInput.style.animation = 'shake';
+		elementInput.classList.remove('incorrect');
+		elementInput.setAttribute('style', '');
+	}, 820);
+	elementInput.style.borderColor = 'red';
+	elementInput.style.animation = 'shake';
 }
 
 /* Firebase - Typically used here  for signing in using providers */
@@ -51,27 +51,58 @@ const facebookAuth = new firebase.auth.FacebookAuthProvider();
 
 // Google Sign-in
 document.querySelector('[data-auth-provider=google]').onclick = () => {
-  auth.signInWithPopup(googleAuth).then(user => {
-    alert(user + " has signed in using google")
-  }).catch(err => console.error(err))
-}
+	auth
+		.signInWithPopup(googleAuth)
+		.then(user => {
+			alert(user + ' has signed in using google');
+		})
+		.catch(err => console.error(err));
+};
 
 // Facebook Sign-in
 document.querySelector('[data-auth-provider=facebook]').onclick = () => {
-  auth.signInWithPopup(facebookAuth).then(user => {
-    alert(user + " has signed in using facebook")
-  }).catch(err => console.error(err));
-}
+	auth
+		.signInWithPopup(facebookAuth)
+		.then(user => {
+			alert(user + ' has signed in using facebook');
+		})
+		.catch(err => console.error(err));
+};
+
+document.querySelector('#signin-form').onsubmit = () => {
+	let username = document.querySelector('#user-name').value;
+	let password = document.querySelector('#user-pass').value;
+
+	let loginEntry = {
+		username : username,
+		password : password
+	};
+
+	let http = new XMLHttpRequest();
+	let url = window.location.origin + '/login';
+
+	http.open('POST', url, true);
+
+	http.setRequestHeader('Content-Type', 'application/json');
+
+	http.onreadystatechange = () => {
+		if (http.readyState == 4 && http.status == 200) {
+			alert('Successfully Signed in');
+		}
+	};
+
+	http.send(JSON.stringify(loginEntry));
+};
 
 // When an enter key is pressed in the password,
 // it will click the sign in button
 document.querySelector('#user-pass').addEventListener('keypress', function(e) {
-  if (e.key == 'Enter') document.querySelector('#signin-btn').click();
+	if (e.key == 'Enter') document.querySelector('#signin-btn').click();
 });
 
 // When the home button is clicked, it will
 // redirect to origin url
-document.querySelector('#back-btn').onclick = () => window.location.href = window.location.origin;
+document.querySelector('#back-btn').onclick = () => (window.location.href = window.location.origin);
 
 // When the form is submitted, it prevents the default action
 // which runs the action given to it, instead runs a specific function
