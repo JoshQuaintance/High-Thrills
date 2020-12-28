@@ -53,8 +53,8 @@ const facebookAuth = new firebase.auth.FacebookAuthProvider();
 document.querySelector('[data-auth-provider=google]').onclick = () => {
 	auth
 		.signInWithPopup(googleAuth)
-		.then(user => {
-			alert(user + ' has signed in using google');
+		.then(async user => {
+			alert(user.user.displayName + ' has signed in using google');
 		})
 		.catch(err => console.error(err));
 };
@@ -64,13 +64,14 @@ document.querySelector('[data-auth-provider=facebook]').onclick = () => {
 	auth
 		.signInWithPopup(facebookAuth)
 		.then(user => {
+            console.log(user.user);
 			alert(user + ' has signed in using facebook');
 		})
 		.catch(err => console.error(err));
 };
 
-
-document.querySelector('form').onsubmit = () => {
+document.querySelector('form').onsubmit = (e) => {
+    e.preventDefault();
 	let username = document.querySelector('#user-name').value;
 	let password = document.querySelector('#user-pass').value;
 
@@ -95,6 +96,15 @@ document.querySelector('form').onsubmit = () => {
 	http.send(JSON.stringify(loginEntry));
 };
 
+// auth.onAuthStateChanged(user => {
+//     if (user) {
+//         user.getIdToken(true).then(idToken => {
+//             let http = new XMLHttpRequest();
+//             let url = window.location.origin + '/login';
+//         })
+//     }
+// })
+
 // When an enter key is pressed in the password,
 // it will click the sign in button
 document.querySelector('#user-pass').addEventListener('keypress', function(e) {
@@ -104,8 +114,3 @@ document.querySelector('#user-pass').addEventListener('keypress', function(e) {
 // When the home button is clicked, it will
 // redirect to origin url
 document.querySelector('#back-btn').onclick = () => (window.location.href = window.location.origin);
-
-// When the form is submitted, it prevents the default action
-// which runs the action given to it, instead runs a specific function
-// that will connect to the DB
-document.querySelector('form').onsubmit = e => e.preventDefault();
