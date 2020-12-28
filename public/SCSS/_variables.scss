@@ -10,12 +10,18 @@
 // 'Ubuntu', sans-serif
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 :root {
-  --text-color-danger: #cb2431;
-  --main-blue: #42a2d1;
-  --login-object-theme: #000;
-  --login-text-theme: #000;
-  --link-text-color: #0366d6;
+	--text-color-danger: #cb2431;
+	--main-blue: #42a2d1;
+	--login-object-theme: #000;
+	--login-text-theme: #000;
+	--link-text-color: #0366d6;
 }
 
 $link-text-color: var(--link-text-color);
