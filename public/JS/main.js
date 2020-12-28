@@ -11,9 +11,9 @@ intersectionObs(
 	function(entries) {
 		entries.forEach(entry => {
 			if (!entry.isIntersecting) {
-				document.querySelector('.main').classList.add('scrolled');
+				document.querySelector('.menu').classList.add('scrolled');
 			} else {
-				document.querySelector('.main').classList.remove('scrolled');
+				document.querySelector('.menu').classList.remove('scrolled');
 			}
 		});
 	},
