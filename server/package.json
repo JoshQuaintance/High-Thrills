@@ -8,8 +8,6 @@
     "start": "npm run build:prefix && concurrently \"start http://localhost:3000\" \"node .\"",
     "dev:start": "concurrently \"npm run dev:scss\" \"nodemon . dev\" \"start http://localhost:3000\"",
     "dev:scss": "onchange \"../public/SCSS/*.scss\" -- npm run build:prefix",
-    "dev:db": "nodemon . emulator",
-    "dev:emulators": "cd firebase && firebase emulators:start",
     "build:scss": "node-sass --recursive --output-style expanded --output ../public/CSS --source-map true --source-map-contents ../public/SCSS",
     "build:prefix": "npm run build:scss && postcss ../public/CSS/*.css --replace --use=autoprefixer"
   },
@@ -17,6 +15,7 @@
   "author": "Joshua Pelealu, Ryan Strunk",
   "license": "MIT",
   "devDependencies": {
+    "@types/firebase": "^3.2.1",
     "autoprefixer": "^10.1.0",
     "cheerio": "^1.0.0-rc.3",
     "concurrently": "^5.3.0",
@@ -33,7 +32,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "firebase": "^8.2.0",
+    "firebase": "^8.2.1",
     "firebase-admin": "^9.4.2",
     "glob": "^7.1.6"
   }
