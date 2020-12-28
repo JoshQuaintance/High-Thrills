@@ -42,50 +42,49 @@ body {
 		flex-wrap: wrap;
 
 		#title h3 {
-      font-size: 15px;
-      text-align: center;
+			font-size: 15px;
+			text-align: center;
 		}
 
 		#sign-in-with-provider {
-      @include d-flex(row, space-around, left);
+			@include d-flex(row, space-around, left);
 
-      width: 100%;
-      flex-wrap: wrap;
+			width: 100%;
+			flex-wrap: wrap;
 			margin-top: 10px;
 
 			.auth-container {
-        background-color: white;
-        opacity: .95;
+				background-color: white;
+				opacity: .95;
 				border-radius: 3px;
-        padding: 7.5px 15px;
-        padding-left: 10px;
-        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
-        cursor: pointer;
-        font-weight: 500;
-        width: 130px;
-
+				padding: 7.5px 15px;
+				padding-left: 10px;
+				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2),
+					0 1px 5px 0 rgba(0, 0, 0, .12);
+				cursor: pointer;
+				font-weight: 500;
+				width: 130px;
 				transition: all .3s ease;
-
 				&[data-auth-provider=google] {
-          color: grey;
-          // font-size: 20px !important;
+					color: grey;
+					// font-size: 20px !important;
 
-          &:hover {
-            color: black !important;
-            border-color: black;
-            filter: brightness(96%);
-            transition: all .3s ease;
-          }
-        } // google
+					&:hover {
+						color: black !important;
+						border-color: black;
+						filter: brightness(96%);
+						transition: all .3s ease;
+					}
+				} // google
 
-        &[data-auth-provider=facebook] {
-          background-color: #3b5998;
-          color: white;
+				&[data-auth-provider=facebook] {
+					background-color: #3b5998;
+					color: white;
 
-          &:hover {
-            filter: brightness(115%);
-          }
-        }// facebook
+					&:hover {
+						filter: brightness(115%);
+					}
+				} // facebook
 
 				span.sign-in-auth {
 					@include d-flex(row, flex-start, center);
@@ -148,7 +147,7 @@ body {
 			text-decoration: underline;
 		}
 	}
-}
+}// .register-container
 
 .login-container {
 	@include d-flex(column, space-between, center);
@@ -201,98 +200,7 @@ body {
 		}
 	}
 
-	.textbox {
-		width: 100%;
-		position: relative;
-		overflow: hidden;
-		font-size: 20px;
-		padding: 30px 0;
-		margin: 8px 0;
-		border-bottom: 1px solid $login-object-theme;
 
-		i {
-			position: absolute;
-			width: 26px;
-			float: left;
-			text-align: center;
-			bottom: 12px;
-		}
-
-		.underline {
-			position: absolute;
-			height: 2px;
-			width: 100%;
-			bottom: 0px;
-
-			&:before {
-				position: absolute;
-				content: "";
-				height: 100%;
-				width: 100%;
-				background: $login-object-theme;
-				transform: scaleX(0);
-				transform-origin: center;
-				transition: transform .3s ease;
-				bottom: 0;
-			}
-
-			&.incorrect::before {
-				background: $danger-red !important;
-			}
-		} // underline
-
-		label {
-			z-index: 1;
-			position: absolute;
-			bottom: 8px;
-			left: 36px;
-			color: rgb(92, 92, 92);
-			pointer-events: none;
-			transition: all .3s ease;
-			font-size: 20px;
-
-			.required {
-				color: red;
-			}
-		}
-
-		input {
-			z-index: 2;
-			position: absolute;
-			border: none;
-			outline: none;
-			background: none;
-			color: $login-text-theme;
-			font-size: 18px;
-			width: 90%;
-			float: left;
-			bottom: 10px;
-			margin: 0 10px;
-			left: 20px;
-
-			&:-webkit-autofill,
-			&:-webkit-autofill:hover,
-			&:-webkit-autofill:focus {
-				-webkit-text-fill-color: $login-text-theme;
-				background-color: transparent;
-				box-shadow: 0 0 0px 1000px transparent inset;
-				transition: background-color 5000s ease-in-out 0s;
-			}
-
-			&:focus ~ label,
-			&:valid ~ label {
-				transform: translateY(-27px) translateX(-30px);
-				font-size: 15px;
-				font-weight: bold;
-				color: $login-object-theme;
-			}
-
-			&:focus ~ .underline:before,
-			&:valid ~ .underline:before {
-				transform: scaleX(1);
-			}
-		} // input
-	} // .textbox
 
 	.btn {
 		width: 100%;
