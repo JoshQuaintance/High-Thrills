@@ -3,6 +3,23 @@ const timeouts = {};
 // Global variable that contains all the popover references.
 const popovers = {};
 
+/* Setup Firebase */
+const firebaseConfig = {
+	apiKey            : 'AIzaSyAw-zFeGnwfSiET2gZrZaVZebnZyajeR4Q',
+	authDomain        : 'high-thrills.firebaseapp.com',
+	projectId         : 'high-thrills',
+	storageBucket     : 'high-thrills.appspot.com',
+	messagingSenderId : '365192472687',
+	appId             : '1:365192472687:web:cea4c3c565845ce5ae459a',
+	measurementId     : 'G-2DJXH2BFMT'
+};
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+const auth = firebase.auth();
+const googleAuth = new firebase.auth.GoogleAuthProvider();
+const facebookAuth = new firebase.auth.FacebookAuthProvider();
+
 /**
  * Executes function after a timeout
  * @param {function} callback The callback run after the timeout
@@ -18,16 +35,16 @@ function executeAfterTimeout(callback, time, identifier) {
 	if (timeouts[identifier]) clearTimeout(timeouts[identifier]);
 
 	let newTimeout = setTimeout(() => {
-        callback();
+		callback();
 		// Automatically clears the timeout and deletes it from the 'timeouts' object after it's run
-        clearTimeout(timeouts[identifier]);
-        delete timeouts[identifier]
+		clearTimeout(timeouts[identifier]);
+		delete timeouts[identifier];
 	}, time);
 	timeouts[identifier] = newTimeout;
 }
 
 // Create instances for all popovers
-function createPopoverInstances() {
+function initializePopovers() {
 	// Sets default props
 	tippy.setDefaultProps({
 		trigger   : 'manual',
@@ -52,10 +69,8 @@ function createPopoverInstances() {
 	/* - - - */
 }
 
-createPopoverInstances();
-
 /**
- * Triggers a popup 
+ * Triggers a popup
  * @param {String} name Name of the popover to trigger. It will check the 'POPOVER' variable if the popover exists.
  */
 function triggerPopover(name) {
@@ -103,9 +118,9 @@ function incorrect(el) {
 	Parent.style.animation = '.82s shake ease-in-out';
 
 	// Show the popover about incorrect repeated password.
-    triggerPopover('repeatPassWrong');
-    
-    // Clears the styles after 6 seconds
+	triggerPopover('repeatPassWrong');
+
+	// Clears the styles after 6 seconds
 	executeAfterTimeout(
 		() => {
 			Parent.style.animation = '';
@@ -117,40 +132,120 @@ function incorrect(el) {
 		},
 		5000,
 		'resetInputStyles'
-    );
+	);
 }
 
-/* Repeat Password Validation */
-document.querySelector('#repeat-pass').oninput = function() {
-	const givenPass = document.querySelector('#user-pass').value;
-	if (this.value !== givenPass.substr(0, this.value.length)) {
-		incorrect(this);
-	}
-};
-
-/* Register Form Handler */
-document.querySelector('form').onsubmit = e => {
-	e.preventDefault();
-	const username = document.querySelector('#user-name').value;
+function signUp() {
+	const email = document.querySelector('#user-email').value;
 	const password = document.querySelector('#user-pass').value;
 
 	let loginEntry = {
-		username : username,
-		password : password
+		email,
+		password
 	};
 
 	let http = new XMLHttpRequest();
-	let url = window.location.origin + '/login';
+	let url = window.location.origin + '/join';
 
 	http.open('POST', url, true);
 
 	http.setRequestHeader('Content-Type', 'application/json');
 
-	http.onreadystatechange = () => {
-		if (http.readyState == 4 && http.status == 200) {
-			alert('Successfully Signed in');
-		}
+	http.onreadystatechange = async () => {
+		if (http.readyState == 4) {
+			if (http.status == 409) {
+				console.log(http.response);
+			}
+			if (http.status == 201) {
+				try {
+					// Automatically signs user in
+					let user = await firebase.default.auth().signInWithEmailAndPassword(email, password);
+
+					// If the response type is an object and the action is to login and verify email
+					if (JSON.parse(http.response) && JSON.parse(http.response).action == 'login-and-verify-email') {
+						// send the current user an email verification
+						firebase.default
+							.auth()
+							.currentUser.sendEmailVerification({ url: window.location.origin })
+							.then(() => {
+								// when the email is successfully sent,
+								// Using the dialog library, inform the user that an email to verify the ownership of the email is sent
+								new duDialog(
+									'Verify Email Ownership',
+									`A verification email to prove your ownership of the email was sent to the email address provided. \nPlease verify the ownership of the email address`,
+									duDialog.DEFAULT
+								);
+							})
+							.catch(err => {
+								throw `Error Sending Email Verification: ${err}`;
+							});
+					}
+				} catch (err) {
+					console.error(err);
+				} // try catch block
+			} // http status if statement
+		} // readyState if statement
 	};
 
 	http.send(JSON.stringify(loginEntry));
-};
+}
+
+// Run when the document loads
+document.addEventListener(
+	'DOMContentLoaded',
+	() => {
+		// Initialize all popovers
+		initializePopovers();
+
+		/* Repeat Password Validation */
+		document.querySelector('#repeat-pass').oninput = function() {
+			const givenPass = document.querySelector('#user-pass').value;
+			if (this.value !== givenPass.substr(0, this.value.length)) {
+				incorrect(this);
+			}
+		};
+
+		/* Register Form Handler */
+		document.querySelector('form').onsubmit = e => {
+			e.preventDefault();
+			const email = document.querySelector('#user-email').value;
+			const password = document.querySelector('#user-pass').value;
+
+			// auth.signInWithEmailAndPassword(email, password)
+
+			signUp();
+		};
+
+		// Google Sign-in
+		document.querySelector('[data-auth-provider=google]').onclick = () => {
+			auth
+				.signInWithPopup(googleAuth)
+				.then(user => {
+					alert(user.user.displayName + ' has signed in using Google');
+				})
+				.catch(e => {
+					if (e.code == 'auth/account-exists-with-different-credential') {
+					}
+				});
+		};
+
+		// Facebook Sign-in
+		document.querySelector('[data-auth-provider=facebook]').onclick = () => {
+			auth
+				.signInWithPopup(facebookAuth)
+				.then(user => {
+					alert(user.user.displayName + ' has signed in using facebook');
+				})
+				.catch(e => console.error(e));
+		};
+	},
+	false
+);
+
+// auth.onAuthStateChanged(user => {
+// 	if (user) {
+//         console.log('t')
+// 		user.sendEmailVerification().then(() => console.log('sent'));
+// 	} else {
+// 	}
+// });
