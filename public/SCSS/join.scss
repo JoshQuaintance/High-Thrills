@@ -240,8 +240,8 @@ body {
 		&:focus ~ label,
 		&:valid ~ label {
 			transform: translateY(-27px) translateX(-30px);
-			font-size: 15px;
-			font-weight: bold;
+			font-size: 17px;
+			font-weight: 500;
 			color: $login-object-theme;
 		}
 
@@ -402,4 +402,10 @@ input.incorrect {
 	.tippy-arrow {
 		color: $danger-red;
 	}
+}
+
+/* Tippy (Tooltip) */
+[id^=tippy-] {
+	font-family: 'Langar', cursive;
+	letter-spacing: 1px;
 }
