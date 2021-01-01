@@ -16,7 +16,7 @@ app.use(express.json()); // JSON Middleware - Parse JSON in server
 app.listen(3000);  // Express to listen in port 3000
 
 // Routing for database connection
-require('./db-handler.js')(app);
+require('./auth.js')(app);
 
 // Checks if there is an extra argument given when running this file
 // If there is and it has the word 'dev' in it then run the socket
