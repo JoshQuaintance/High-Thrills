@@ -5,13 +5,13 @@ const popovers = {};
 
 /* Setup Firebase */
 const firebaseConfig = {
-	apiKey            : 'AIzaSyAw-zFeGnwfSiET2gZrZaVZebnZyajeR4Q',
-	authDomain        : 'high-thrills.firebaseapp.com',
-	projectId         : 'high-thrills',
-	storageBucket     : 'high-thrills.appspot.com',
-	messagingSenderId : '365192472687',
-	appId             : '1:365192472687:web:cea4c3c565845ce5ae459a',
-	measurementId     : 'G-2DJXH2BFMT'
+    apiKey            : 'AIzaSyAw-zFeGnwfSiET2gZrZaVZebnZyajeR4Q',
+    authDomain        : 'high-thrills.firebaseapp.com',
+    projectId         : 'high-thrills',
+    storageBucket     : 'high-thrills.appspot.com',
+    messagingSenderId : '365192472687',
+    appId             : '1:365192472687:web:cea4c3c565845ce5ae459a',
+    measurementId     : 'G-2DJXH2BFMT'
 };
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
@@ -27,46 +27,46 @@ const facebookAuth = new firebase.auth.FacebookAuthProvider();
  * @param {string} identifier The identifier used to store, and clear the timeout.
  */
 function executeAfterTimeout(callback, time, identifier) {
-	if (!callback) return console.error(new ReferenceError('The callback is not provided'));
-	if (!time) return console.error(new ReferenceError('The timeout amount in ms is not provided'));
-	if (!identifier) return console.error(new ReferenceError('The name of the timeout is not provided'));
+    if (!callback) return console.error(new ReferenceError('The callback is not provided'));
+    if (!time) return console.error(new ReferenceError('The timeout amount in ms is not provided'));
+    if (!identifier) return console.error(new ReferenceError('The name of the timeout is not provided'));
 
-	// Clears the timeout if it exists
-	if (timeouts[identifier]) clearTimeout(timeouts[identifier]);
+    // Clears the timeout if it exists
+    if (timeouts[identifier]) clearTimeout(timeouts[identifier]);
 
-	let newTimeout = setTimeout(() => {
-		callback();
-		// Automatically clears the timeout and deletes it from the 'timeouts' object after it's run
-		clearTimeout(timeouts[identifier]);
-		delete timeouts[identifier];
-	}, time);
-	timeouts[identifier] = newTimeout;
+    let newTimeout = setTimeout(() => {
+        callback();
+        // Automatically clears the timeout and deletes it from the 'timeouts' object after it's run
+        clearTimeout(timeouts[identifier]);
+        delete timeouts[identifier];
+    }, time);
+    timeouts[identifier] = newTimeout;
 }
 
 // Create instances for all popovers
 function initializePopovers() {
-	// Sets default props
-	tippy.setDefaultProps({
-		trigger   : 'manual',
-		animation : 'scale',
-		duration  : 200
-	});
+    // Sets default props
+    tippy.setDefaultProps({
+        trigger   : 'manual',
+        animation : 'scale',
+        duration  : 200
+    });
 
-	/* When repeated password is wrong */
-	// Reference element to target
-	let repeatPassElmnt = document.querySelector('#repeat-pass');
+    /* When repeated password is wrong */
+    // Reference element to target
+    let repeatPassElmnt = document.querySelector('#repeat-pass');
 
-	// Creates an instance
-	tippy(repeatPassElmnt, {
-		content   : 'Repeated Password has to be the same as the Password provided!',
-		theme     : 'danger',
-		placement : 'bottom',
-		distance  : 25
-	});
-	let repeatPassWrong = repeatPassElmnt._tippy;
-	repeatPassWrong.popper.style.textAlign = 'center';
-	popovers.repeatPassWrong = repeatPassWrong;
-	/* - - - */
+    // Creates an instance
+    tippy(repeatPassElmnt, {
+        content   : 'Repeated Password has to be the same as the Password provided!',
+        theme     : 'danger',
+        placement : 'bottom',
+        distance  : 25
+    });
+    let repeatPassWrong = repeatPassElmnt._tippy;
+    repeatPassWrong.popper.style.textAlign = 'center';
+    popovers.repeatPassWrong = repeatPassWrong;
+    /* - - - */
 }
 
 /**
@@ -74,20 +74,20 @@ function initializePopovers() {
  * @param {String} name Name of the popover to trigger. It will check the 'POPOVER' variable if the popover exists.
  */
 function triggerPopover(name) {
-	// If a name is not provided
-	if (name == undefined) return console.error(new ReferenceError('Popover name is not provided'));
+    // If a name is not provided
+    if (name == undefined) return console.error(new ReferenceError('Popover name is not provided'));
 
-	// Checks if the popover exists
-	if (popovers[name]) {
-		popovers[name].show();
-		executeAfterTimeout(() => popovers[name].hide(), 5000, 'hideResetPassPopover');
-	} else {
-		console.error(
-			new ReferenceError("Cannot find a popover named '" + name + "'\n") +
-				'Here is a list of all the popovers:\n',
-			Object.keys(popovers)
-		);
-	}
+    // Checks if the popover exists
+    if (popovers[name]) {
+        popovers[name].show();
+        executeAfterTimeout(() => popovers[name].hide(), 5000, 'hideResetPassPopover');
+    } else {
+        console.error(
+            new ReferenceError("Cannot find a popover named '" + name + "'\n") +
+                'Here is a list of all the popovers:\n',
+            Object.keys(popovers)
+        );
+    }
 }
 
 /**
@@ -95,151 +95,151 @@ function triggerPopover(name) {
  * @param {HTMLElement} el Element to label incorrect
  */
 function incorrect(el) {
-	const Parent = el.parentElement;
-	let elementIcon = Parent.querySelector('.im');
-	let elementUnderline = Parent.querySelector('.underline');
-	let elementInput = Parent.querySelector('input');
-	let inputLabel = Parent.querySelector('label');
+    const Parent = el.parentElement;
+    let elementIcon = Parent.querySelector('.im');
+    let elementUnderline = Parent.querySelector('.underline');
+    let elementInput = Parent.querySelector('input');
+    let inputLabel = Parent.querySelector('label');
 
-	/* Reset any applied value before */
-	Parent.style.animation = '';
-	Parent.style.borderColor = 'black';
-	inputLabel.classList.remove('incorrect');
-	elementIcon.classList.remove('incorrect');
-	elementUnderline.classList.remove('incorrect');
-	elementInput.classList.remove('incorrect');
+    /* Reset any applied value before */
+    Parent.style.animation = '';
+    Parent.style.borderColor = 'black';
+    inputLabel.classList.remove('incorrect');
+    elementIcon.classList.remove('incorrect');
+    elementUnderline.classList.remove('incorrect');
+    elementInput.classList.remove('incorrect');
 
-	/* Add the effects */
-	inputLabel.classList.add('incorrect');
-	elementIcon.classList.add('incorrect');
-	elementUnderline.classList.add('incorrect');
-	elementInput.classList.add('incorrect');
-	Parent.style.borderColor = 'red';
-	Parent.style.animation = '.82s shake ease-in-out';
+    /* Add the effects */
+    inputLabel.classList.add('incorrect');
+    elementIcon.classList.add('incorrect');
+    elementUnderline.classList.add('incorrect');
+    elementInput.classList.add('incorrect');
+    Parent.style.borderColor = 'red';
+    Parent.style.animation = '.82s shake ease-in-out';
 
-	// Show the popover about incorrect repeated password.
-	triggerPopover('repeatPassWrong');
+    // Show the popover about incorrect repeated password.
+    triggerPopover('repeatPassWrong');
 
-	// Clears the styles after 6 seconds
-	executeAfterTimeout(
-		() => {
-			Parent.style.animation = '';
-			Parent.style.borderColor = 'black';
-			inputLabel.classList.remove('incorrect');
-			elementIcon.classList.remove('incorrect');
-			elementUnderline.classList.remove('incorrect');
-			elementInput.classList.remove('incorrect');
-		},
-		5000,
-		'resetInputStyles'
-	);
+    // Clears the styles after 6 seconds
+    executeAfterTimeout(
+        () => {
+            Parent.style.animation = '';
+            Parent.style.borderColor = 'black';
+            inputLabel.classList.remove('incorrect');
+            elementIcon.classList.remove('incorrect');
+            elementUnderline.classList.remove('incorrect');
+            elementInput.classList.remove('incorrect');
+        },
+        5000,
+        'resetInputStyles'
+    );
 }
 
 function signUp() {
-	const email = document.querySelector('#user-email').value;
-	const password = document.querySelector('#user-pass').value;
+    const email = document.querySelector('#user-email').value;
+    const password = document.querySelector('#user-pass').value;
 
-	let loginEntry = {
-		email,
-		password
-	};
+    let loginEntry = {
+        email,
+        password
+    };
 
-	let http = new XMLHttpRequest();
-	let url = window.location.origin + '/join';
+    let http = new XMLHttpRequest();
+    let url = window.location.origin + '/join';
 
-	http.open('POST', url, true);
+    http.open('POST', url, true);
 
-	http.setRequestHeader('Content-Type', 'application/json');
+    http.setRequestHeader('Content-Type', 'application/json');
 
-	http.onreadystatechange = async () => {
-		if (http.readyState == 4) {
-			if (http.status == 409) {
-				console.log(http.response);
-			}
-			if (http.status == 201) {
-				try {
-					// Automatically signs user in
-					let user = await firebase.default.auth().signInWithEmailAndPassword(email, password);
+    http.onreadystatechange = async () => {
+        if (http.readyState == 4) {
+            if (http.status == 409) {
+                console.log(http.response);
+            }
+            if (http.status == 201) {
+                try {
+                    // Automatically signs user in
+                    let user = await firebase.default.auth().signInWithEmailAndPassword(email, password);
 
-					// If the response type is an object and the action is to login and verify email
-					if (JSON.parse(http.response) && JSON.parse(http.response).action == 'login-and-verify-email') {
-						// send the current user an email verification
-						firebase.default
-							.auth()
-							.currentUser.sendEmailVerification({ url: window.location.origin })
-							.then(() => {
-								// when the email is successfully sent,
-								// Using the dialog library, inform the user that an email to verify the ownership of the email is sent
-								new duDialog(
-									'Verify Email Ownership',
-									`A verification email to prove your ownership of the email was sent to the email address provided. \nPlease verify the ownership of the email address`,
-									duDialog.DEFAULT
-								);
-							})
-							.catch(err => {
-								throw `Error Sending Email Verification: ${err}`;
-							});
-					}
-				} catch (err) {
-					console.error(err);
-				} // try catch block
-			} // http status if statement
-		} // readyState if statement
-	};
+                    // If the response type is an object and the action is to login and verify email
+                    if (JSON.parse(http.response) && JSON.parse(http.response).action == 'login-and-verify-email') {
+                        // send the current user an email verification
+                        firebase.default
+                            .auth()
+                            .currentUser.sendEmailVerification({ url: window.location.origin })
+                            .then(() => {
+                                // when the email is successfully sent,
+                                // Using the dialog library, inform the user that an email to verify the ownership of the email is sent
+                                new duDialog(
+                                    'Verify Email Ownership',
+                                    `A verification email to prove your ownership of the email was sent to the email address provided. \nPlease verify the ownership of the email address`,
+                                    duDialog.DEFAULT
+                                );
+                            })
+                            .catch(err => {
+                                throw `Error Sending Email Verification: ${err}`;
+                            });
+                    }
+                } catch (err) {
+                    console.error(err);
+                } // try catch block
+            } // http status if statement
+        } // readyState if statement
+    };
 
-	http.send(JSON.stringify(loginEntry));
+    http.send(JSON.stringify(loginEntry));
 }
 
 // Run when the document loads
 document.addEventListener(
-	'DOMContentLoaded',
-	() => {
-		// Initialize all popovers
-		initializePopovers();
+    'DOMContentLoaded',
+    () => {
+        // Initialize all popovers
+        initializePopovers();
 
-		/* Repeat Password Validation */
-		document.querySelector('#repeat-pass').oninput = function() {
-			const givenPass = document.querySelector('#user-pass').value;
-			if (this.value !== givenPass.substr(0, this.value.length)) {
-				incorrect(this);
-			}
-		};
+        /* Repeat Password Validation */
+        document.querySelector('#repeat-pass').oninput = function() {
+            const givenPass = document.querySelector('#user-pass').value;
+            if (this.value !== givenPass.substr(0, this.value.length)) {
+                incorrect(this);
+            }
+        };
 
-		/* Register Form Handler */
-		document.querySelector('form').onsubmit = e => {
-			e.preventDefault();
-			const email = document.querySelector('#user-email').value;
-			const password = document.querySelector('#user-pass').value;
+        /* Register Form Handler */
+        document.querySelector('form').onsubmit = e => {
+            e.preventDefault();
+            const email = document.querySelector('#user-email').value;
+            const password = document.querySelector('#user-pass').value;
 
-			// auth.signInWithEmailAndPassword(email, password)
+            // auth.signInWithEmailAndPassword(email, password)
 
-			signUp();
-		};
+            signUp();
+        };
 
-		// Google Sign-in
-		document.querySelector('[data-auth-provider=google]').onclick = () => {
-			auth
-				.signInWithPopup(googleAuth)
-				.then(user => {
-					alert(user.user.displayName + ' has signed in using Google');
-				})
-				.catch(e => {
-					if (e.code == 'auth/account-exists-with-different-credential') {
-					}
-				});
-		};
+        // Google Sign-in
+        document.querySelector('[data-auth-provider=google]').onclick = () => {
+            auth
+                .signInWithPopup(googleAuth)
+                .then(user => {
+                    alert(user.user.displayName + ' has signed in using Google');
+                })
+                .catch(e => {
+                    if (e.code == 'auth/account-exists-with-different-credential') {
+                    }
+                });
+        };
 
-		// Facebook Sign-in
-		document.querySelector('[data-auth-provider=facebook]').onclick = () => {
-			auth
-				.signInWithPopup(facebookAuth)
-				.then(user => {
-					alert(user.user.displayName + ' has signed in using facebook');
-				})
-				.catch(e => console.error(e));
-		};
-	},
-	false
+        // Facebook Sign-in
+        document.querySelector('[data-auth-provider=facebook]').onclick = () => {
+            auth
+                .signInWithPopup(facebookAuth)
+                .then(user => {
+                    alert(user.user.displayName + ' has signed in using facebook');
+                })
+                .catch(e => console.error(e));
+        };
+    },
+    false
 );
 
 // auth.onAuthStateChanged(user => {
