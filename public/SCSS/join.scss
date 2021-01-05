@@ -3,409 +3,500 @@
 
 /* Background Image */
 #background-img {
-	z-index: -5;
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	filter: brightness(45%);
+    z-index: -5;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    filter: brightness(45%);
 }
 
 body {
-	@include d-flex(column, center, center);
+    @include d-flex(column, center, center);
 
-	height: 100vh;
-	overflow: hidden;
-	background-color: white;
+    height: 100vh;
+    overflow: hidden;
+    background-color: white;
+}
+
+/* Container Styles */
+.form-container {
+    @include d-flex(column, space-around, center);
+
+    overflow: hidden auto;
+    position: relative;
+    padding: 0px 25px;
+    border-radius: 15px;
+    background-color: rgba(246, 248, 250, .85);
+    border: 1px solid rgba(128, 128, 128, .5);
+    box-shadow: 0px 0px 8px rgba(128, 128, 128, 0.75);
+    width: 460px;
+    height: 500px;
 }
 
 /* Main Container */
 .login-container {
-	@include d-flex(column, space-between, center);
+    @include d-flex(column, space-between, center);
 
-	z-index: 10;
-	position: relative;
-	overflow: hidden;
-	border-radius: 7px;
-	width: 500px;
-	height: auto;
-	color: black !important;
-	font-family: 'Langar', cursive;
-	letter-spacing: 1.5px;
-	transition: width .3s ease-in-out, height .3s ease-in-out;
+    z-index: 10;
+    position: relative;
+    overflow: hidden;
+    border-radius: 7px;
+    width: 500px;
+    height: auto;
+    color: black !important;
+    font-family: 'Langar', cursive;
+    letter-spacing: 1.5px;
+    transition: width .3s ease-in-out, height .3s ease-in-out;
 
-	h1#main-title {
-		@include d-flex('', center, center);
+    h1#main-title {
+        @include d-flex('', center, center);
 
-		color: white;
-		font-family: 'Ubuntu', sans-serif;
-		position: relative;
-		text-align: center;
-		font-size: 35px;
-		margin-bottom: 10px;
-		width: fit-content;
+        color: white;
+        font-family: 'Ubuntu', sans-serif;
+        position: relative;
+        text-align: center;
+        font-size: 35px;
+        margin-bottom: 10px;
+        width: fit-content;
 
-		&::after {
-			@include simpleAnim(width, 100%, 1.5s, 0s, ease-in-out);
+        &::after {
+            @include simpleAnim(width, 100%, 1.5s, 0s, ease-in-out);
 
-			z-index: 5;
-			content: '';
-			position: absolute;
-			border: 3px solid $login-object-theme;
-			border-radius: 15px;
-			bottom: -5px;
-		}
-	} // h1
+            z-index: 5;
+            content: '';
+            position: absolute;
+            border: 3px solid $login-object-theme;
+            border-radius: 15px;
+            bottom: -5px;
+        }
+    } // h1
 
-	form {
-		@include d-flex(column, center, center);
-		@keyframes formFadeIn {
-			100% {
-				opacity: 100%;
-			}
-		}
+    form {
+        @include d-flex(column, center, center);
+        @keyframes formFadeIn {
+            100% {
+                opacity: 100%;
+            }
+        }
 
-		overflow-y: auto;
-		opacity: 0;
-		padding-bottom: 5px;
-		width: 100%;
-		animation: .3s formFadeIn .3s ease-in-out forwards;
-	} // form
+        position: relative;
+        overflow-y: auto;
+        opacity: 0;
+        padding-bottom: 5px;
+        width: 100%;
+        animation: .3s formFadeIn .3s ease-in-out forwards;
 
-	.input-container {
-		@include d-flex(column, space-around, center);
+        .dots {
+            @include d-flex(row, space-around, center);
 
-		overflow: hidden auto;
-		position: relative;
-		padding: 0px 25px;
-		border-radius: 15px;
-		background-color: rgba(246, 248, 250, .85);
-		border: 1px solid rgba(128, 128, 128, .5);
-		box-shadow: 0px 0px 8px rgba(128, 128, 128, 0.75);
-		width: 460px;
-		height: 500px;
-	} // .input-container
+            z-index: 4;
+            position: absolute;
+            top: 12px;
+            width: 35px;
+            height: auto;
+
+            [id^=dot] {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: black;
+                opacity: 50%;
+                transition: opacity .4s ease-in-out;
+            }
+        }
+    } // form
+
+    // Automatically choses which dot to highlight according to
+    // what data-page is given
+    &[data-page="1"] #dot1 {
+        opacity: 1;
+        transition: opacity .4s ease-in-out;
+    }
+
+    &[data-page="2"] #dot2 {
+        opacity: 1;
+        transition: opacity .4s ease-in-out;
+    }
 } // .login-container
 
+.user-details-container {
+    .full-name {
+        @include d-flex(row, space-between, center);
+        width: 100%;
+
+        .textbox {
+            position: relative;
+            overflow: initial;
+            width: 48%;
+            border-radius: 8px;
+            border: 2px solid black;
+            height: 50px;
+            padding: 0;
+
+            label {
+                @include absoluteCenter;
+
+                z-index: 5;
+                text-align: center;
+                width: 100%;
+                display: table;
+            }
+
+            input {
+                @include absoluteCenter;
+
+                margin: 0;
+                height: 50%;
+
+                &:focus ~ label,
+                &:valid ~ label {
+                    transform: translateY(-48px) translateX(-141px);
+                    font-size: 18px;
+                }
+
+                &:focus ~ .underline:before,
+                &:valid ~ .underline:before {
+                    transform: scaleX(1);
+                }
+            } // input
+        } // .textbox
+    } // .full-name
+} // .user-details-container
+
 .login-provider {
-	@include d-flex(column, center, flex-start);
+    @include d-flex(column, center, flex-start);
 
-	width: 100%;
-	position: relative;
-	text-align: left;
-	flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    text-align: left;
+    flex-wrap: wrap;
 
-	span#login-title h3 {
-		margin-top: 15px;
-		font-size: 15px;
-		text-align: center;
-	}
+    span#login-title h3 {
+        margin-top: 15px;
+        font-size: 15px;
+        text-align: center;
+    }
 
-	section#sign-in-with-provider {
-		@include d-flex(row, space-around, left);
+    section#sign-in-with-provider {
+        @include d-flex(row, space-around, left);
 
-		width: 100%;
-		flex-wrap: wrap;
-		margin-top: 15px;
+        width: 100%;
+        flex-wrap: wrap;
+        margin-top: 15px;
 
-		.auth-container {
-			background-color: white;
-			opacity: .95;
-			border-radius: 3px;
-			padding: 7.5px 15px;
-			padding-left: 10px;
-			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
-			cursor: pointer;
-			font-weight: 500;
-			width: 130px;
-			transition: all .3s ease;
+        .auth-container {
+            background-color: white;
+            opacity: .95;
+            border-radius: 3px;
+            padding: 7.5px 15px;
+            padding-left: 10px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            cursor: pointer;
+            font-weight: 500;
+            width: 130px;
+            transition: all .3s ease;
 
-			// For every provider
+            // For every provider
 
-			// Google
-			&[data-auth-provider=google] {
-				color: grey;
+            // Google
+            &[data-auth-provider=google] {
+                color: grey;
 
-				&:hover {
-					color: black !important;
-					border-color: black;
-					filter: brightness(96%);
-					transition: all .3 ease;
-				}
-			}
+                &:hover {
+                    color: black !important;
+                    border-color: black;
+                    filter: brightness(96%);
+                    transition: all .3 ease;
+                }
+            }
 
-			// Facebook
-			&[data-auth-provider=facebook] {
-				background-color: #3b5998;
-				color: white;
+            // Facebook
+            &[data-auth-provider=facebook] {
+                background-color: #3b5998;
+                color: white;
 
-				&:hover {
-					filter: brightness(115%);
-				}
-			}
+                &:hover {
+                    filter: brightness(115%);
+                }
+            }
 
-			span.sign-in-auth {
-				@include d-flex(row, flex-start, center);
+            span.sign-in-auth {
+                @include d-flex(row, flex-start, center);
 
-				letter-spacing: 1px;
+                letter-spacing: 1px;
 
-				img {
-					margin-right: 10px;
-					width: auto;
-					height: 24px;
-				}
-			}
-		} // .auth-container
-	} // section#sign-in-with-provider
+                img {
+                    margin-right: 10px;
+                    width: auto;
+                    height: 24px;
+                }
+            }
+        } // .auth-container
+    } // section#sign-in-with-provider
 } // .login-provider
 
 /* Login Inputs */
 .textbox {
-	width: 100%;
-	position: relative;
-	overflow: hidden;
-	font-size: 20px;
-	padding: 30px 0;
-	margin: 8px 0;
-	border-bottom: 1px solid $login-object-theme;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 30px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid $login-object-theme;
 
-	i {
-		position: absolute;
-		width: 26px;
-		float: left;
-		text-align: center;
-		bottom: 12px;
-	}
+    i {
+        position: absolute;
+        width: 26px;
+        float: left;
+        text-align: center;
+        bottom: 12px;
+    }
 
-	.underline {
-		position: absolute;
-		height: 2px;
-		width: 100%;
-		bottom: 0px;
+    .underline {
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        bottom: 0px;
 
-		&:before {
-			position: absolute;
-			content: "";
-			height: 100%;
-			width: 100%;
-			background: $login-object-theme;
-			transform: scaleX(0);
-			transform-origin: center;
-			transition: transform .3s ease;
-			bottom: 0;
-		}
+        &:before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 100%;
+            background: $login-object-theme;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform .3s ease;
+            bottom: 0;
+        }
 
-		&.incorrect::before {
-			background: $danger-red !important;
-		}
-	} // underline
+        &.incorrect::before {
+            background: $danger-red !important;
+        }
+    } // underline
 
-	label {
-		z-index: 1;
-		position: absolute;
-		bottom: 8px;
-		left: 36px;
-		color: rgb(92, 92, 92);
-		pointer-events: none;
-		transition: all .3s ease;
-		font-size: 20px;
+    label {
+        z-index: 1;
+        position: absolute;
+        bottom: 8px;
+        left: 36px;
+        color: rgb(92, 92, 92);
+        pointer-events: none;
+        transition: all .3s ease;
+        font-size: 20px;
 
-		.required {
-			color: red;
-		}
-	}
+        .required {
+            color: red;
+        }
+    }
 
-	input {
-		z-index: 2;
-		position: absolute;
-		border: none;
-		outline: none;
-		background: none;
-		color: $login-text-theme;
-		font-size: 18px;
-		width: 90%;
-		float: left;
-		bottom: 10px;
-		margin: 0 10px;
-		left: 20px;
+    input {
+        z-index: 2;
+        position: absolute;
+        border: none;
+        outline: none;
+        background: none;
+        color: $login-text-theme;
+        font-size: 18px;
+        width: 90%;
+        float: left;
+        bottom: 10px;
+        margin: 0 10px;
+        left: 20px;
 
-		&:-webkit-autofill,
-		&:-webkit-autofill:hover,
-		&:-webkit-autofill:focus {
-			-webkit-text-fill-color: $login-text-theme;
-			background-color: transparent;
-			box-shadow: 0 0 0px 1000px transparent inset;
-			transition: background-color 5000s ease-in-out 0s;
-		}
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+            -webkit-text-fill-color: $login-text-theme;
+            background-color: transparent;
+            box-shadow: 0 0 0px 1000px transparent inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
 
-		&:focus ~ label,
-		&:valid ~ label {
-			transform: translateY(-27px) translateX(-30px);
-			font-size: 17px;
-			font-weight: 500;
-			color: $login-object-theme;
-		}
+        &:focus ~ label,
+        &:valid ~ label {
+            transform: translateY(-27px) translateX(-30px);
+            font-size: 17px;
+            font-weight: 500;
+            color: $login-object-theme;
+        }
 
-		&:focus ~ .underline:before,
-		&:valid ~ .underline:before {
-			transform: scaleX(1);
-		}
-	} // input
+        &:focus ~ .underline:before,
+        &:valid ~ .underline:before {
+            transform: scaleX(1);
+        }
+    } // input
 } // .textbox
 
 /* Buttons */
 .btn-cont {
-	display: flex;
-	width: 100%;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 35px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 35px;
 
-	.btn {
-		width: 100%;
-		background: none;
-		border: 2px solid $login-object-theme;
-		color: $login-text-theme;
-		padding: 5px;
-		font-size: 19px;
-		cursor: pointer;
-		margin: 12px 12px;
-		border-radius: 5px;
-		transition: all .5s ease;
-	} //.btn
+    .btn {
+        width: 100%;
+        background: none;
+        border: 2px solid $login-object-theme;
+        color: $login-text-theme;
+        padding: 5px;
+        font-size: 19px;
+        cursor: pointer;
+        margin: 12px 12px;
+        border-radius: 5px;
+        transition: all .5s ease;
+    } //.btn
 
-	#signin-btn {
-		border-color: #2c974b;
-		color: #2c974b;
-		margin-right: 0px;
-		transition: color, .3s ease, background-color .3s ease;
+    #signin-btn {
+        border-color: #2c974b;
+        color: #2c974b;
+        margin-right: 0px;
+        transition: color, .3s ease, background-color .3s ease;
 
-		&:hover {
-			background-color: #2c974b;
-			color: white;
-			transition: color, .3s ease, background-color .3s ease;
-		}
-	}
+        &:hover {
+            background-color: #2c974b;
+            color: white;
+            transition: color, .3s ease, background-color .3s ease;
+        }
+    }
 
-	#back-btn {
-		margin-left: 0px;
-		border-color: $login-object-theme;
-		color: $login-text-theme;
-		font-weight: bold;
+    #back-btn {
+        margin-left: 0px;
+        border-color: $login-object-theme;
+        color: $login-text-theme;
+        font-weight: bold;
 
-		&:hover {
-			background-color: $login-object-theme;
-			color: white;
-		}
-	}
+        &:hover {
+            background-color: $login-object-theme;
+            color: white;
+        }
+    }
 } // .btn-cont
 
 /* Forgot Password */
 .forgot-container {
-	@include fadeIn(1s);
-	margin-top: 15px;
+    @include fadeIn(1s);
+    margin-top: 15px;
 
-	a {
-		color: $link-text-color;
-		text-decoration: none;
-		font-style: normal;
-		font-family: 'Ubuntu', sans-serif;
-		letter-spacing: 0px;
+    a {
+        color: $link-text-color;
+        text-decoration: none;
+        font-style: normal;
+        font-family: 'Ubuntu', sans-serif;
+        letter-spacing: 0px;
 
-		&:hover {
-			text-decoration: underline;
-		}
-	}
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 } // .forgot-container
 
 /* Register */
 .register-container,
 .haveAccount-container {
-	@include d-flex('', space-around, center);
+    @include d-flex('', space-around, center);
 
-	width: 360px;
-	height: 50px;
-	margin-top: 5px;
-	border-radius: 15px;
-	background-color: rgba(246, 248, 250, .85);
-	border: 1px solid rgba(128, 128, 128, 0.514);
+    width: 360px;
+    height: 50px;
+    margin-top: 5px;
+    border-radius: 15px;
+    background-color: rgba(246, 248, 250, .85);
+    border: 1px solid rgba(128, 128, 128, 0.514);
 
-	a {
-		color: $link-text-color;
-		text-decoration: none;
-		font-style: normal;
-		font-family: 'Ubuntu', sans-serif;
+    a {
+        color: $link-text-color;
+        text-decoration: none;
+        font-style: normal;
+        font-family: 'Ubuntu', sans-serif;
 
-		&:hover {
-			text-decoration: underline;
-		}
-	}
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 } // .register-container
 
 /* If there is an invalid entry */
 
 /* Shaking animation */
 @keyframes shake {
-	10%,
-	90% {
-		transform: translate3d(-1px, 0, 0);
-	}
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
 
-	20%,
-	80% {
-		transform: translate3d(2px, 0, 0);
-	}
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
 
-	30%,
-	50%,
-	70% {
-		transform: translate3d(-4px, 0, 0);
-	}
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
 
-	40%,
-	60% {
-		transform: translate3d(4px, 0, 0);
-	}
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }
 
 .shake {
-	animation: shake 0.82s;
+    animation: shake 0.82s;
 }
 
 /* Label incorrect input */
 .im.incorrect,
 label.incorrect,
 input.incorrect {
-	color: red !important;
+    color: red !important;
 }
 
 /* Add a text */
 #title-incorrect {
-	color: #ff0000;
-	margin: 0;
-	padding: 0;
-	display: relative;
-	position: absolute;
-	left: 25px;
-	top: 15px;
-	transition: all .5s ease;
+    color: #ff0000;
+    margin: 0;
+    padding: 0;
+    display: relative;
+    position: absolute;
+    left: 25px;
+    top: 15px;
+    transition: all .5s ease;
 }
 
 #title {
-	width: 100%;
+    width: 100%;
 }
 
 .tippy-box[data-theme~='danger'] {
-	background-color: $danger-red !important;
-	color: white;
+    background-color: $danger-red !important;
+    color: white;
 
-	.tippy-arrow {
-		color: $danger-red;
-	}
+    .tippy-arrow {
+        color: $danger-red;
+    }
+}
+
+.clearfix {
+    &:after,
+    &:before {
+        content: '.';
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+
+    &:after {
+        clear: both;
+    }
 }
 
 /* Tippy (Tooltip) */
 [id^=tippy-] {
-	font-family: 'Langar', cursive;
-	letter-spacing: 1px;
+    font-family: 'Langar', cursive;
+    letter-spacing: 1px;
 }
