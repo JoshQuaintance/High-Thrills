@@ -29,11 +29,16 @@
         <!-- Background Image -->
         <img id="background-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F151205.jpg&f=1&nofb=1"alt="">
 
-        <div class="login-container">
+        <div class="login-container" data-page='2'>
             <h1 id="main-title">Join <br> High Thrills</h1>
             <form id="signin-form login-wrapper" autocomplete="off">
+                <div class="dots">
+                    <i id="dot1"></i>
+                    <i id="dot2"></i>
+                </div>
 
-                <div class="input-container">
+                <!-- Page 1 -->
+                <!-- <div class="input-container form-container">
 
                     <div class="login-provider">
                         <span id="login-title">
@@ -55,7 +60,6 @@
                         </section>
 
                     </div>
-                    <!-- <h3 id="title-incorrect"> Password Incorrect </h3> -->
 
                     <div class="textbox email">
                         <i class="im im-mail" aria-hidden="true"></i>
@@ -82,12 +86,26 @@
                         <input id="signin-btn" type="submit" class="btn" value="Register">
                     </div>
 
-                    <!-- <div class="forgot-container">
-          <a href="/pass-reset">Forgot Password?</a>
-        </div> -->
+                </div> -->
 
+                <!-- Page 2 -->
+                <div class="user-details-container form-container">
+                    <!-- Get Full Name for display name -->
+                    <div class="full-name">
+                        <div class="textbox first-name clearfix">
+                            <input type="text" required id="first-name">
+                            <div class="underline"></div>
+                            <label>First Name</label>
+                        </div>
+                        <div class="textbox last-name clearfix">
+                            <input type="text" required id="last-name">
+                            <div class="underline"></div>
+                            <label>Last Name</label>
+                        </div>
+                    </div>
+
+                    
                 </div>
-
 
             </form>
         </div>
@@ -104,11 +122,11 @@
         <!-- Popper JS -->
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://unpkg.com/tippy.js@6"></script>
-        
+
 
         <!-- duDialog JS - (Dialog Library) -->
         <script src="../assets/duDialog/duDialog.min.js"></script>
-        
+
         <!-- Main JS -->
         <script src="../JS/join.js"></script>
 
