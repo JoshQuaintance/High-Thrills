@@ -1,16 +1,20 @@
 /**
  * ! Authentication Handler
- * 
- * This is where all the authentication 
- * of a user is being done. 
- * Logins, Registers, and Password Resets 
+ *
+ * This is where all the authentication
+ * of a user is being done.
+ * Logins, Registers, and Password Resets
  * all done here using firebase.
- * 
+ *
  */
 
 const firebase = require('firebase/app');
 const admin = require('firebase-admin');
+
+// Load in dotenv so it can parse the environment variables / secrets
 require('dotenv').config();
+// Get the service account by getting it from the '.env' file and then decoding it from
+// base64 and converting it to string. Then parse it into json.
 const serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT, 'base64').toString('ascii'));
 
 // Add Firebase products individually
@@ -38,6 +42,10 @@ firebase.initializeApp(firebaseConfig);
 admin.initializeApp({
     credential : admin.credential.cert(serviceAccount)
 });
+
+// Export the createUser handler so it won't interfere with the
+// admin SDK's initialize app function.
+const createUser = require('./db-handlers/createUsers');
 
 // Export the function so it can be run in the main index file
 /**
@@ -68,10 +76,10 @@ module.exports = function dbConnection(app) {
 
                 // Checks if the user used google sign-in as a provider
                 if (user.providerData.some(provider => provider.providerId == 'google.com')) {
-                    /** 
+                    /**
                      *? If they do use google, then update their authentication details so that it will merge with
                      *? google's authentication provider because if the user signed in using google previously, that means
-                     *? the user knows the password to the email used in the google sign in 
+                     *? the user knows the password to the email used in the google sign in
                      */
 
                     admin
@@ -105,7 +113,13 @@ module.exports = function dbConnection(app) {
                             displayName : email,
                             password
                         })
-                        .then(() => {
+                        .then(userRecord => {
+                            createUser(userRecord).catch(err => {
+                                throw {
+                                    code    : 'error-storing-user',
+                                    message : err.message || new Error('Error while trying to store user info in db')
+                                };
+                            });
                             // When it's created, respond back so the user can be logged in
                             res.status(201).send({ message: 'User Created!', action: 'login-and-verify-email' });
                         })
@@ -131,10 +145,9 @@ module.exports = function dbConnection(app) {
             console.error(err);
 
             // Check if the error is an object, if it is then send a status and message accordingly
+            // otherwise respond back to the client with a server error
             if (typeof err == 'object') res.status(err.httpStatus || 500).send(err || 'Server Error!');
-            else
-                // else just send 500 Server Error!
-                res.status(500).send('Server Error!');
+            else res.status(500).send('Server Error!');
         }
     });
 };
