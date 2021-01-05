@@ -206,14 +206,11 @@ document.addEventListener(
         };
 
         /* Register Form Handler */
-        document.querySelector('form').onsubmit = e => {
+        document.querySelector('form').onsubmit = function(e) {
             e.preventDefault();
-            const email = document.querySelector('#user-email').value;
-            const password = document.querySelector('#user-pass').value;
 
-            // auth.signInWithEmailAndPassword(email, password)
-
-            signUp();
+            // signUp();
+            this.parentElement.setAttribute('data-page', '2')
         };
 
         // Google Sign-in
