@@ -15,6 +15,13 @@
 	opacity: 100%;
 }
 
+@mixin absoluteCenter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
+}
+
 @mixin simpleAnim ($property, $val: '', $dur: 2s, $delay: 0s, $timing: linear,) {
 	@if type-of($property) == 'map' {
 		$animName: '';
