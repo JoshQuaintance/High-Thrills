@@ -14,7 +14,6 @@ const firebaseConfig = {
     measurementId     : 'G-2DJXH2BFMT'
 };
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
 
 const auth = firebase.auth();
 const googleAuth = new firebase.auth.GoogleAuthProvider();
@@ -135,6 +134,25 @@ function incorrect(el) {
     );
 }
 
+function checkAvailability() {
+    const email = document.querySelector('#user-email').value;
+
+    const http = new XMLHttpRequest();
+    const url = window.location.origin + '/availability';
+
+    http.open('POST', url, true);
+    http.setRequestHeader('Content-Type', 'application/json');
+
+    http.onreadystatechange = async () => {
+        if ((http.readyState = 4)) {
+            if (http.status == 200) {
+            }
+        }
+    };
+
+    http.send(JSON.stringify({ email: email }));
+}
+
 function signUp() {
     const email = document.querySelector('#user-email').value;
     const password = document.querySelector('#user-pass').value;
@@ -194,6 +212,7 @@ function signUp() {
 document.addEventListener(
     'DOMContentLoaded',
     () => {
+        console.log('DOM LOADED');
         // Initialize all popovers
         initializePopovers();
 
@@ -210,7 +229,49 @@ document.addEventListener(
             e.preventDefault();
 
             // signUp();
-            this.parentElement.setAttribute('data-page', '2')
+            checkAvailability();
+            let _this = this;
+            _this.classList.add('transition-off');
+
+            executeAfterTimeout(
+                () => {
+                    _this.classList.remove('transition-off');
+                    document.querySelector('.user-details-container').classList.add('transition-on');
+                    executeAfterTimeout(
+                        () => {
+                            document.querySelector('.user-details-container').classList.remove('transition-on');
+                        },
+                        500,
+                        'clear-transition-on-class'
+                    );
+                    _this.parentElement.setAttribute('data-page', '2');
+                },
+                500,
+                'transition-second-page'
+            );
+        };
+
+        // Back button on 2nd page
+        document.querySelector('#back-btn').onclick = function() {
+            console.log('s', this.parentElement.parentElement.parentElement);
+            let _this = this;
+            _this.parentElement.parentElement.classList.add('transition-off');
+            executeAfterTimeout(
+                () => {
+                    _this.parentElement.parentElement.classList.remove('transition-off');
+                    document.querySelector('form#login-wrapper').classList.add('transition-on');
+                    executeAfterTimeout(
+                        () => {
+                            document.querySelector('form#login-wrapper').classList.remove('transition-on');
+                        },
+                        500,
+                        'clear-transition-on-class-1'
+                    );
+                    _this.parentElement.parentElement.parentElement.setAttribute('data-page', '1');
+                },
+                500,
+                'transition-back-to-first'
+            );
         };
 
         // Google Sign-in

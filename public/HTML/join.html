@@ -29,16 +29,16 @@
         <!-- Background Image -->
         <img id="background-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F151205.jpg&f=1&nofb=1"alt="">
 
-        <div class="login-container" data-page='2'>
+        <div class="login-container" data-page='1'>
             <h1 id="main-title">Join <br> High Thrills</h1>
-            <form id="signin-form login-wrapper" autocomplete="off">
+            <form id="login-wrapper" autocomplete="off">
                 <div class="dots">
                     <i id="dot1"></i>
                     <i id="dot2"></i>
                 </div>
 
                 <!-- Page 1 -->
-                <!-- <div class="input-container form-container">
+                <div class="input-container form-container">
 
                     <div class="login-provider">
                         <span id="login-title">
@@ -82,31 +82,51 @@
                         <label>Repeat Password<span class="required">*</span></label>
                     </div>
                     <div class="btn-cont">
-                        <input id="back-btn" type="button" class="btn" value="Home">
-                        <input id="signin-btn" type="submit" class="btn" value="Register">
+                        <input id="home-btn" type="button" class="btn" value="Home">
+                        <input id="signin-btn" type="submit" class="btn" value="Next">
                     </div>
 
-                </div> -->
-
-                <!-- Page 2 -->
-                <div class="user-details-container form-container">
-                    <!-- Get Full Name for display name -->
-                    <div class="full-name">
-                        <div class="textbox first-name clearfix">
-                            <input type="text" required id="first-name">
-                            <div class="underline"></div>
-                            <label>First Name</label>
-                        </div>
-                        <div class="textbox last-name clearfix">
-                            <input type="text" required id="last-name">
-                            <div class="underline"></div>
-                            <label>Last Name</label>
-                        </div>
-                    </div>
-
-                    
                 </div>
 
+            </form>
+
+            <!-- Page 2 -->
+            <form class="user-details-container form-container">
+                <div class="dots">
+                    <i id="dot1"></i>
+                    <i id="dot2"></i>
+                </div>
+                <div class="textbox first-name clearfix">
+                    <i class="im im-user-circle"></i>
+                    <input type="text" required id="first-name">
+                    <div class="underline"></div>
+                    <label>First Name</label>
+                </div>
+                <div class="textbox last-name clearfix">
+                    <i class="im im-user-circle"></i>
+                    <input type="text" required id="last-name">
+                    <div class="underline"></div>
+                    <label>Last Name</label>
+                </div>
+
+                <div class="textbox state clearfix">
+                    <i class="im im-apartment"></i>
+                    <input type="text" required id="state">
+                    <div class="underline"></div>
+                    <label>State</label>
+                </div>
+
+                <div class="textbox city clearfix">
+                    <i class="im im-apartment"></i>
+                    <input type="text" required id="city">
+                    <div class="underline"></div>
+                    <label>City</label>
+                </div>
+
+                <div class="btn-cont">
+                    <input type="button" id="back-btn" class="btn" value="Back">
+                    <input type="submit" id="signin-btn" class="btn" value="Register">
+                </div>
             </form>
         </div>
 

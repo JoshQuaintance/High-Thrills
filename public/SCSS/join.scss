@@ -18,6 +18,76 @@ body {
     background-color: white;
 }
 
+[data-page="1"] {
+    .user-details-container {
+        display: none;
+    }
+}
+
+[data-page="2"] {
+    form#login-wrapper {
+        display: none !important;
+    }
+}
+
+.login-container form#login-wrapper.transition-on {
+    .input-container .textbox,
+    .login-provider {
+        @keyframes translate-in-1 {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+        }
+        opacity: 1;
+        transform: translateX(0px);
+        animation: .5s ease-in translate-in-1;
+    }
+}
+
+.login-container form#login-wrapper.transition-off {
+    .input-container .textbox,
+    .login-provider {
+        @keyframes translate-out-1 {
+            from {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+        opacity: 0;
+        transform: translateX(-50px);
+        animation: .5s ease-out translate-out-1;
+    }
+}
+
+.login-container form.user-details-container {
+    &.transition-on .textbox {
+        @keyframes translate-in {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+        }
+
+        opacity: 1;
+        transform: translateX(0px);
+        animation: .5s ease-in translate-in;
+    }
+
+    &.transition-off .textbox {
+        @keyframes translate-out {
+            from {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+
+        opacity: 0;
+        transform: translateX(50px);
+        animation: .5s ease-out translate-out;
+    }
+}
+
 /* Container Styles */
 .form-container {
     @include d-flex(column, space-around, center);
@@ -73,18 +143,15 @@ body {
 
     form {
         @include d-flex(column, center, center);
-        @keyframes formFadeIn {
-            100% {
-                opacity: 100%;
-            }
-        }
 
         position: relative;
         overflow-y: auto;
-        opacity: 0;
         padding-bottom: 5px;
         width: 100%;
-        animation: .3s formFadeIn .3s ease-in-out forwards;
+
+        &.user-details-container {
+            justify-content: space-between;
+        }
 
         .dots {
             @include d-flex(row, space-around, center);
@@ -120,47 +187,64 @@ body {
 } // .login-container
 
 .user-details-container {
-    .full-name {
+    // display: initial;
+    padding-top: 5%;
+    justify-content: space-around;
+
+    .details-cont {
         @include d-flex(row, space-between, center);
         width: 100%;
+    } // .full-name
 
-        .textbox {
-            position: relative;
-            overflow: initial;
-            width: 48%;
-            border-radius: 8px;
-            border: 2px solid black;
-            height: 50px;
-            padding: 0;
+    .textbox {
+        position: relative;
+        overflow: initial;
+        width: 100%;
+        border-radius: 8px;
+        border: 2px solid black;
+        height: 50px;
+        padding: 0;
 
-            label {
-                @include absoluteCenter;
+        i {
+            margin-left: 5px;
+        }
 
-                z-index: 5;
-                text-align: center;
-                width: 100%;
-                display: table;
+        label {
+            @include absoluteCenter;
+
+            margin-left: 45px;
+            z-index: 5;
+            text-align: left;
+            width: 100%;
+            display: table;
+        }
+
+        input {
+            @include absoluteCenter;
+
+            margin: 0;
+            margin-left: 15px;
+            height: 100%;
+
+            &:focus ~ label,
+            &:valid ~ label {
+                transform: translateY(-50px) translateX(0px);
+                font-size: 18px;
+                left: 0;
+                margin-left: 0;
             }
 
-            input {
-                @include absoluteCenter;
+            &:focus ~ .underline:before,
+            &:valid ~ .underline:before {
+                transform: scaleX(1);
+            }
+        } // input
+    } // .textbox
 
-                margin: 0;
-                height: 50%;
-
-                &:focus ~ label,
-                &:valid ~ label {
-                    transform: translateY(-48px) translateX(-141px);
-                    font-size: 18px;
-                }
-
-                &:focus ~ .underline:before,
-                &:valid ~ .underline:before {
-                    transform: scaleX(1);
-                }
-            } // input
-        } // .textbox
-    } // .full-name
+    #signin-btn {
+        color: $success-green;
+        border-color: $success-green;
+    }
 } // .user-details-container
 
 .login-provider {
@@ -364,7 +448,8 @@ body {
         }
     }
 
-    #back-btn {
+    #back-btn,
+    #home-btn {
         margin-left: 0px;
         border-color: $login-object-theme;
         color: $login-text-theme;
