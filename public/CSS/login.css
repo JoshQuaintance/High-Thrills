@@ -14,6 +14,7 @@
   --login-object-theme: #000;
   --login-text-theme: #000;
   --link-text-color: #0366d6;
+  --success-green: #2c974b;
 }
 
 @keyframes fadeIn {
