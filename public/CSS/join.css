@@ -14,6 +14,7 @@
   --login-object-theme: #000;
   --login-text-theme: #000;
   --link-text-color: #0366d6;
+  --success-green: #2c974b;
 }
 
 @keyframes fadeIn {
@@ -39,6 +40,68 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: white;
+}
+
+[data-page="1"] .user-details-container {
+  display: none;
+}
+
+[data-page="2"] form#login-wrapper {
+  display: none !important;
+}
+
+.login-container form#login-wrapper.transition-on .input-container .textbox,
+.login-container form#login-wrapper.transition-on .login-provider {
+  opacity: 1;
+  transform: translateX(0px);
+  animation: .5s ease-in translate-in-1;
+}
+
+@keyframes translate-in-1 {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+}
+
+.login-container form#login-wrapper.transition-off .input-container .textbox,
+.login-container form#login-wrapper.transition-off .login-provider {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: .5s ease-out translate-out-1;
+}
+
+@keyframes translate-out-1 {
+  from {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.login-container form.user-details-container.transition-on .textbox {
+  opacity: 1;
+  transform: translateX(0px);
+  animation: .5s ease-in translate-in;
+}
+
+@keyframes translate-in {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+}
+
+.login-container form.user-details-container.transition-off .textbox {
+  opacity: 0;
+  transform: translateX(50px);
+  animation: .5s ease-out translate-out;
+}
+
+@keyframes translate-out {
+  from {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }
 
 /* Container Styles */
@@ -113,16 +176,12 @@ body {
   align-items: center;
   position: relative;
   overflow-y: auto;
-  opacity: 0;
   padding-bottom: 5px;
   width: 100%;
-  animation: .3s formFadeIn .3s ease-in-out forwards;
 }
 
-@keyframes formFadeIn {
-  100% {
-    opacity: 100%;
-  }
+.login-container form.user-details-container {
+  justify-content: space-between;
 }
 
 .login-container form .dots {
@@ -156,7 +215,12 @@ body {
   transition: opacity .4s ease-in-out;
 }
 
-.user-details-container .full-name {
+.user-details-container {
+  padding-top: 5%;
+  justify-content: space-around;
+}
+
+.user-details-container .details-cont {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -164,45 +228,58 @@ body {
   width: 100%;
 }
 
-.user-details-container .full-name .textbox {
+.user-details-container .textbox {
   position: relative;
   overflow: initial;
-  width: 48%;
+  width: 100%;
   border-radius: 8px;
   border: 2px solid black;
   height: 50px;
   padding: 0;
 }
 
-.user-details-container .full-name .textbox label {
+.user-details-container .textbox i {
+  margin-left: 5px;
+}
+
+.user-details-container .textbox label {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  margin-left: 45px;
   z-index: 5;
-  text-align: center;
+  text-align: left;
   width: 100%;
   display: table;
 }
 
-.user-details-container .full-name .textbox input {
+.user-details-container .textbox input {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
-  height: 50%;
+  margin-left: 15px;
+  height: 100%;
 }
 
-.user-details-container .full-name .textbox input:focus ~ label,
-.user-details-container .full-name .textbox input:valid ~ label {
-  transform: translateY(-48px) translateX(-141px);
+.user-details-container .textbox input:focus ~ label,
+.user-details-container .textbox input:valid ~ label {
+  transform: translateY(-50px) translateX(0px);
   font-size: 18px;
+  left: 0;
+  margin-left: 0;
 }
 
-.user-details-container .full-name .textbox input:focus ~ .underline:before,
-.user-details-container .full-name .textbox input:valid ~ .underline:before {
+.user-details-container .textbox input:focus ~ .underline:before,
+.user-details-container .textbox input:valid ~ .underline:before {
   transform: scaleX(1);
+}
+
+.user-details-container #signin-btn {
+  color: var(--success-green);
+  border-color: var(--success-green);
 }
 
 .login-provider {
@@ -407,14 +484,16 @@ body {
   transition: color, .3s ease, background-color .3s ease;
 }
 
-.btn-cont #back-btn {
+.btn-cont #back-btn,
+.btn-cont #home-btn {
   margin-left: 0px;
   border-color: var(--login-object-theme);
   color: var(--login-text-theme);
   font-weight: bold;
 }
 
-.btn-cont #back-btn:hover {
+.btn-cont #back-btn:hover,
+.btn-cont #home-btn:hover {
   background-color: var(--login-object-theme);
   color: white;
 }
