@@ -100,6 +100,25 @@ const injectSocket = app => {
         }, 1000);
     }
 
+    const timeouts = {};
+
+    function executeAfterTimeout(callback, time, identifier) {
+        if (!callback) return console.error(new ReferenceError('The callback is not provided'));
+        if (!time) return console.error(new ReferenceError('The timeout amount in ms is not provided'));
+        if (!identifier) return console.error(new ReferenceError('The name of the timeout is not provided'));
+
+        // Clears the timeout if it exists
+        if (timeouts[identifier]) clearTimeout(timeouts[identifier]);
+
+        let newTimeout = setTimeout(() => {
+            callback();
+            // Automatically clears the timeout and deletes it from the 'timeouts' object after it's run
+            clearTimeout(timeouts[identifier]);
+            delete timeouts[identifier];
+        }, time);
+        timeouts[identifier] = newTimeout;
+    }
+
     // Watch for the public directory and the subdirectories inside it if there is any changes
     fs.watch(path.join(publicDir), { recursive: true }, (e, filename) => {
         // If it's not a change in the file, don't do anything
@@ -107,10 +126,14 @@ const injectSocket = app => {
         // Log if there is a change in the file
         console.log(`Restarting due to changes in ${filename}`);
         // If there is changes, do a countdown, then emit to socket to update the page by reloading.
-        executeAfterCountdown(() => {
-            // Emmit an event to the client to update the page
-            socket.emit('update-page');
-        });
+        executeAfterTimeout(
+            () => {
+                // Emmit an event to the client to update the page
+                socket.emit('update-page');
+            },
+            1800,
+            'refresh-countdown'
+        );
     });
 
     // Socket Listener
