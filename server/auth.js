@@ -13,6 +13,7 @@ const admin = require('firebase-admin');
 
 // Load in dotenv so it can parse the environment variables / secrets
 require('dotenv').config();
+
 // Get the service account by getting it from the '.env' file and then decoding it from
 // base64 and converting it to string. Then parse it into json.
 const serviceAccount = JSON.parse(Buffer.from(process.env.SERVICE_ACCOUNT, 'base64').toString('ascii'));
@@ -53,6 +54,17 @@ const createUser = require('./db-handlers/createUsers');
  * @param {Express.Application} app Express app instance
  */
 module.exports = function dbConnection(app) {
+    app.post('/availability', async (req, res) => {
+        let email = req.body.email;
+
+        try {
+            let user = await admin.auth().getUserByEmail(email);
+            console.log(user);
+        } catch (err) {
+            console.error('error: ' + err);
+        }
+    });
+
     app.post('/join', async (req, res) => {
         // Store username and password into a variable
         let email = req.body.email;
