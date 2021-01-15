@@ -92,8 +92,9 @@ function triggerPopover(name) {
 /**
  * Labels an input incorrect giving it animations and styles
  * @param {HTMLElement} el Element to label incorrect
+ * @param {Boolean} clear To clear the incorrect one or not || false
  */
-function incorrect(el) {
+function incorrect(el, clear = false) {
     const Parent = el.parentElement;
     let elementIcon = Parent.querySelector('.im');
     let elementUnderline = Parent.querySelector('.underline');
@@ -108,30 +109,32 @@ function incorrect(el) {
     elementUnderline.classList.remove('incorrect');
     elementInput.classList.remove('incorrect');
 
-    /* Add the effects */
-    inputLabel.classList.add('incorrect');
-    elementIcon.classList.add('incorrect');
-    elementUnderline.classList.add('incorrect');
-    elementInput.classList.add('incorrect');
-    Parent.style.borderColor = 'red';
-    Parent.style.animation = '.82s shake ease-in-out';
+    if (!clear) {
+        /* Add the effects */
+        inputLabel.classList.add('incorrect');
+        elementIcon.classList.add('incorrect');
+        elementUnderline.classList.add('incorrect');
+        elementInput.classList.add('incorrect');
+        Parent.style.borderColor = 'red';
+        Parent.style.animation = '.82s shake ease-in-out';
 
-    // Show the popover about incorrect repeated password.
-    triggerPopover('repeatPassWrong');
+        // Show the popover about incorrect repeated password.
+        triggerPopover('repeatPassWrong');
 
-    // Clears the styles after 6 seconds
-    executeAfterTimeout(
-        () => {
-            Parent.style.animation = '';
-            Parent.style.borderColor = 'black';
-            inputLabel.classList.remove('incorrect');
-            elementIcon.classList.remove('incorrect');
-            elementUnderline.classList.remove('incorrect');
-            elementInput.classList.remove('incorrect');
-        },
-        5000,
-        'resetInputStyles'
-    );
+        // Clears the styles after 6 seconds
+        executeAfterTimeout(
+            () => {
+                Parent.style.animation = '';
+                Parent.style.borderColor = 'black';
+                inputLabel.classList.remove('incorrect');
+                elementIcon.classList.remove('incorrect');
+                elementUnderline.classList.remove('incorrect');
+                elementInput.classList.remove('incorrect');
+            },
+            5000,
+            'resetInputStyles'
+        );
+    }
 }
 
 function checkAvailability() {
@@ -212,7 +215,6 @@ function signUp() {
 document.addEventListener(
     'DOMContentLoaded',
     () => {
-        console.log('DOM LOADED');
         // Initialize all popovers
         initializePopovers();
 
@@ -221,8 +223,22 @@ document.addEventListener(
             const givenPass = document.querySelector('#user-pass').value;
             if (this.value !== givenPass.substr(0, this.value.length)) {
                 incorrect(this);
+            } else {
+                incorrect(this, true);
+                popovers['repeatPassWrong'] == undefined ? null : popovers['repeatPassWrong'].hide();
             }
         };
+
+        document.querySelectorAll('[class^="im im-eye"]').forEach(el => {
+            el.onclick = function() {
+                // prettier-ignore
+                let type = this.parentElement.querySelector('input').getAttribute('type') == 'password' ? 'text' : 'password';
+                this.parentElement.querySelector('input').setAttribute('type', type);
+
+                this.classList.toggle('im-eye-off');
+                this.classList.toggle('im-eye');
+            };
+        });
 
         /* Register Form Handler */
         document.querySelector('form').onsubmit = function(e) {
@@ -230,6 +246,7 @@ document.addEventListener(
 
             // signUp();
             checkAvailability();
+            if (!checkAvailability()) return alert('ERROR');
             let _this = this;
             _this.classList.add('transition-off');
 
@@ -253,7 +270,6 @@ document.addEventListener(
 
         // Back button on 2nd page
         document.querySelector('#back-btn').onclick = function() {
-            console.log('s', this.parentElement.parentElement.parentElement);
             let _this = this;
             _this.parentElement.parentElement.classList.add('transition-off');
             executeAfterTimeout(
