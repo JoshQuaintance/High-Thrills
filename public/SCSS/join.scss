@@ -335,6 +335,19 @@ body {
         float: left;
         text-align: center;
         bottom: 12px;
+
+        &[class^="im im-eye"] {
+            z-index: 5;
+            position: absolute;
+            cursor: pointer;
+            right: 4px;
+            transition: opacity .3s ease-in-out;
+
+            &:hover {
+                opacity: 65%;
+                transition: opacity .3s ease-in-out;
+            }
+        }
     }
 
     .underline {
