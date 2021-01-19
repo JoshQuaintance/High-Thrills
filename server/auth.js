@@ -46,7 +46,7 @@ admin.initializeApp({
 
 // Export the createUser handler so it won't interfere with the
 // admin SDK's initialize app function.
-const createUser = require('./db-handlers/createUsers');
+const createUserDB = require('./db-handlers/createUsers');
 
 // Export the function so it can be run in the main index file
 /**
@@ -60,8 +60,9 @@ module.exports = function dbConnection(app) {
         try {
             let user = await admin.auth().getUserByEmail(email);
             console.log(user);
+            res.status(409).send('User exist');
         } catch (err) {
-            console.error('error: ' + err);
+            res.status(200).send();
         }
     });
 
@@ -69,6 +70,8 @@ module.exports = function dbConnection(app) {
         // Store username and password into a variable
         let email = req.body.email;
         let password = req.body.password;
+        let name = req.body.fullName;
+        let address = req.body.address;
 
         try {
             try {
@@ -122,11 +125,15 @@ module.exports = function dbConnection(app) {
                         .createUser({
                             // Create a new user with the information given
                             email,
-                            displayName : email,
+                            displayName : name,
                             password
                         })
                         .then(userRecord => {
-                            createUser(userRecord).catch(err => {
+                            let record = userRecord;
+                            record.name = name;
+
+                            record.address = address;
+                            createUserDB(userRecord).catch(err => {
                                 throw {
                                     code    : 'error-storing-user',
                                     message : err.message || new Error('Error while trying to store user info in db')

@@ -6,7 +6,6 @@
 
 const admin = require('firebase-admin');
 
-
 // Import firestore into the file
 require('firebase/firestore');
 
@@ -34,11 +33,12 @@ module.exports = function createUser(user) {
             let userData = {
                 uid         : user.uid,
                 email       : user.email,
+                name        : user.name,
+                address     : user.address,
                 displayName : user.displayName || user.email,
                 providers   : user.providerData.map(provider => provider.providerId),
                 createdAt   : serverTimestamp()
             };
-
 
             userRef
                 .doc(user.email) // get or create a user using it's email

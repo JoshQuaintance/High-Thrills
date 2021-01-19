@@ -137,32 +137,34 @@ function incorrect(el, clear = false) {
     }
 }
 
-function checkAvailability() {
+async function checkAvailability() {
     const email = document.querySelector('#user-email').value;
 
     const http = new XMLHttpRequest();
     const url = window.location.origin + '/availability';
 
-    http.open('POST', url, true);
+    http.open('POST', url, false);
     http.setRequestHeader('Content-Type', 'application/json');
-
-    http.onreadystatechange = async () => {
-        if ((http.readyState = 4)) {
-            if (http.status == 200) {
-            }
-        }
-    };
-
     http.send(JSON.stringify({ email: email }));
+
+    return http.status;
 }
 
 function signUp() {
     const email = document.querySelector('#user-email').value;
     const password = document.querySelector('#user-pass').value;
+    const firstName = document.querySelector('#first-name').value;
+    const lastName = document.querySelector('#last-name').value;
+    const state = document.querySelector('#state').value;
+    const city = document.querySelector('#city').value;
+    const address = `${city}, ${state}`;
+    const fullName = `${firstName} ${lastName}`;
 
     let loginEntry = {
         email,
-        password
+        password,
+        fullName,
+        address
     };
 
     let http = new XMLHttpRequest();
@@ -241,12 +243,11 @@ document.addEventListener(
         });
 
         /* Register Form Handler */
-        document.querySelector('form').onsubmit = function(e) {
+        document.querySelector('#login-wrapper').onsubmit = function(e) {
             e.preventDefault();
 
-            // signUp();
-            checkAvailability();
-            if (!checkAvailability()) return alert('ERROR');
+            if (checkAvailability() == 409) return alert('Account Used');
+
             let _this = this;
             _this.classList.add('transition-off');
 
@@ -266,6 +267,12 @@ document.addEventListener(
                 500,
                 'transition-second-page'
             );
+        };
+
+        document.querySelector('.user-details-container').onsubmit = function(e) {
+            e.preventDefault();
+
+            signUp();
         };
 
         // Back button on 2nd page
