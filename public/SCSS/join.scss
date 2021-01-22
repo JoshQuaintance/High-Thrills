@@ -598,3 +598,23 @@ input.incorrect {
     font-family: 'Langar', cursive;
     letter-spacing: 1px;
 }
+
+@media only screen and (max-width: 400px) {
+    #background-img {
+        width: auto;
+        height: 100%;
+    }
+
+    .login-container {
+        width: 360px;
+
+        #login-wrapper {
+            width: 100%;
+
+            .input-container {
+                width: 100%;
+                transform: scale(100%);
+            }
+        }
+    }
+}

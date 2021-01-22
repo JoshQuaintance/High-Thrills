@@ -17,10 +17,10 @@ const db = admin.firestore();
  * @param {admin.auth.UserRecord} user UserRecord object
  * @returns {Promise<admin.auth.UserRecord>} The updated user record
  */
-module.exports = function createUser(user) {
+module.exports = async function createUser(user) {
     // Return a promise so that error can be handled easily
     return new Promise(async (resolve, reject) => {
-        if (user == undefined || user == null) reject('User object not provided!');
+        if (user == undefined || user == null) reject({ message: 'User object not provided!' });
 
         // Firebase timestamp system
         const { serverTimestamp } = admin.firestore.FieldValue;
@@ -52,5 +52,5 @@ module.exports = function createUser(user) {
         } catch (err) {
             reject(err);
         }
-    });
+    }).catch(err => {});
 };

@@ -66,6 +66,36 @@ module.exports = function dbConnection(app) {
         }
     });
 
+    app.post('/login', async (req, res) => {
+        // Store username and password into a variable
+        let email = req.body.email;
+        let password = req.body.password;
+
+        try {
+            // Try to get the user from the authentication database by using the email
+            // if the user doesn't exist it will raise an error that the catch block will catch
+            let user = await admin.auth().getUserByEmail(email);
+
+            if (user.providerData.some(provider => provider.providerId == 'password')) {
+                res.status(200).send({
+                    message: 'User Exist',
+                    action: 'login'
+
+                })
+            }
+
+        } catch (err) {
+            // if there is an error while executing
+            // Log it as an error
+            console.error(err);
+
+            // Check if the error is an object, if it is then send a status and message accordingly
+            // otherwise respond back to the client with a server error
+            if (typeof err == 'object') res.status(err.httpStatus || 500).send(err || 'Server Error!');
+            else res.status(500).send('Server Error!');
+        }
+    })
+
     app.post('/join', async (req, res) => {
         // Store username and password into a variable
         let email = req.body.email;
@@ -134,6 +164,7 @@ module.exports = function dbConnection(app) {
 
                             record.address = address;
                             createUserDB(userRecord).catch(err => {
+                                console.log(err);
                                 throw {
                                     code    : 'error-storing-user',
                                     message : err.message || new Error('Error while trying to store user info in db')

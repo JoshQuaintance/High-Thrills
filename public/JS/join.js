@@ -184,25 +184,10 @@ function signUp() {
                     // Automatically signs user in
                     let user = await firebase.default.auth().signInWithEmailAndPassword(email, password);
 
-                    // If the response type is an object and the action is to login and verify email
-                    if (JSON.parse(http.response) && JSON.parse(http.response).action == 'login-and-verify-email') {
-                        // send the current user an email verification
-                        firebase.default
-                            .auth()
-                            .currentUser.sendEmailVerification({ url: window.location.origin })
-                            .then(() => {
-                                // when the email is successfully sent,
-                                // Using the dialog library, inform the user that an email to verify the ownership of the email is sent
-                                new duDialog(
-                                    'Verify Email Ownership',
-                                    `A verification email to prove your ownership of the email was sent to the email address provided. \nPlease verify the ownership of the email address`,
-                                    duDialog.DEFAULT
-                                );
-                            })
-                            .catch(err => {
-                                throw `Error Sending Email Verification: ${err}`;
-                            });
-                    }
+                    // // If the response type is an object and the action is to login and verify email
+                    // if (JSON.parse(http.response) && JSON.parse(http.response).action == 'login-and-verify-email') {
+
+                    // }
                 } catch (err) {
                     console.error(err);
                 } // try catch block
@@ -323,10 +308,33 @@ document.addEventListener(
     false
 );
 
-// auth.onAuthStateChanged(user => {
-// 	if (user) {
-//         console.log('t')
-// 		user.sendEmailVerification().then(() => console.log('sent'));
-// 	} else {
-// 	}
-// });
+auth.onAuthStateChanged(user => {
+    if (user) {
+        if (user.emailVerified == false) {
+            // send the current user an email verification
+            // firebase.default
+            //     .auth()
+            //     .currentUser.sendEmailVerification({ url: window.location.origin })
+            //     .then(() => {
+            new duDialog(
+                'Verify Email Ownership',
+                `A verification email to prove your ownership of the email was sent to the email address provided. \nPlease verify the ownership of the email address`,
+                {
+                    buttons   : duDialog.DEFAULT,
+                    callbacks : {
+                        okClick : function() {
+                            window.location.href = window.location.origin;
+                        }
+                    }
+                }
+            );
+            // })
+            // .catch(err => {
+            //     throw `Error Sending Email Verification: ${err}`;
+            // });
+            // when the email is successfully sent,
+            // Using the dialog library, inform the user that an email to verify the ownership of the email is sent
+        } else window.location.href = window.location.origin;
+    } else {
+    }
+});
