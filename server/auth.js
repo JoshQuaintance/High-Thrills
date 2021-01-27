@@ -75,15 +75,21 @@ module.exports = function dbConnection(app) {
             // Try to get the user from the authentication database by using the email
             // if the user doesn't exist it will raise an error that the catch block will catch
             let user = await admin.auth().getUserByEmail(email);
+            let userEmailLogin = user.providerData.some(provider => provider.providerId == 'password');
 
-            if (user.providerData.some(provider => provider.providerId == 'password')) {
+            if (userEmailLogin) {
                 res.status(200).send({
-                    message: 'User Exist',
-                    action: 'login'
-
-                })
+                    message : 'User Exist',
+                    action  : 'login'
+                });
+            } else if (!userEmailLogin) {
+                let providers = user.providerData.map(provider => provider.providerId);
+                res.status(409).send({
+                    message : 'User Exist But No Email Login',
+                    action  : 'setup-email-login',
+                    data    : providers
+                });
             }
-
         } catch (err) {
             // if there is an error while executing
             // Log it as an error
@@ -94,7 +100,7 @@ module.exports = function dbConnection(app) {
             if (typeof err == 'object') res.status(err.httpStatus || 500).send(err || 'Server Error!');
             else res.status(500).send('Server Error!');
         }
-    })
+    });
 
     app.post('/join', async (req, res) => {
         // Store username and password into a variable
