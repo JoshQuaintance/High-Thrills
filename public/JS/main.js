@@ -21,7 +21,6 @@ firebase.auth().onAuthStateChanged(user => {
 
         let imgEl;
 
-        console.log(firebase.auth().currentUser.photoURL)
         if (firebase.auth().currentUser.photoURL) {
             imgEl = document.createElement('img');
             imgEl.setAttribute('src', firebase.auth().currentUser.photoURL);
