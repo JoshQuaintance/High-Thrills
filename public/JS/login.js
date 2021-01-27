@@ -137,6 +137,8 @@ function incorrect(el, clear = false) {
     }
 }
 
+let setupEmail = false;
+
 document.addEventListener('DOMContentLoaded', () => {
     initializePopovers();
 
@@ -151,13 +153,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
-    document.querySelector('form').onsubmit = e => {
+    document.querySelector('form').onsubmit = function(e) {
         e.preventDefault();
         let username = document.querySelector('#user-email').value;
         let password = document.querySelector('#user-pass').value;
 
         let loginEntry = {
-            username : username,
+            email    : username,
             password : password
         };
 
@@ -169,8 +171,28 @@ document.addEventListener('DOMContentLoaded', () => {
         http.setRequestHeader('Content-Type', 'application/json');
 
         http.onreadystatechange = () => {
-            if (http.readyState == 4 && http.status == 200) {
-                alert('Successfully Signed in');
+            if (http.readyState == 4) {
+                if (http.status == 200) {
+                    firebase.auth().signInWithEmailAndPassword(username, password);
+                }
+                if (http.status == 409 && JSON.parse(http.response).action == 'setup-email-login') {
+                    let res = JSON.parse(http.response);
+                    res.data = res.data.map(item => {
+                        item = item.replace('.com', '');
+                        return item.charAt(0).toUpperCase() + item.slice(1);
+                    });
+
+                    // prettier-ignore
+                    new duDialog(
+                        'Email Login Not Setup',
+                        `The email provided does not have an email login setup, but it is tied to a ${res.data.join(' and ')} account. Please login using ${res.data.join(' or ')} to setup the email login automatically.`,
+                        {
+                            buttons : duDialog.DEFAULT
+                        }
+                    );
+
+                    setupEmail = true;
+                }
             }
         };
 
@@ -203,34 +225,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#back-btn').onclick = () => (window.location.href = window.location.origin);
 });
 
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged(async user => {
     if (user) {
-        // if (user.emailVerified == false) {
-        //     // send the current user an email verification
-        //     // firebase.default
-        //     //     .auth()
-        //     //     .currentUser.sendEmailVerification({ url: window.location.origin })
-        //     //     .then(() => {
-        //     new duDialog(
-        //         'Verify Email Ownership',
-        //         `A verification email to prove your ownership of the email was sent to the email address provided. \nPlease verify the ownership of the email address`,
-        //         {
-        //             buttons   : duDialog.DEFAULT,
-        //             callbacks : {
-        //                 okClick : function() {
-        //                     window.location.href = window.location.origin;
-        //                 }
-        //             }
-        //         }
-        //     );
-        // })
-        // .catch(err => {
-        //     throw `Error Sending Email Verification: ${err}`;
-        // });
-        // when the email is successfully sent,
-        // Using the dialog library, inform the user that an email to verify the ownership of the email is sent
-        // } else
+        if (setupEmail) {
+            let email = document.querySelector('#user-email').value;
+            let password = document.querySelector('#user-pass').value;
 
+            let credential = firebase.auth.EmailAuthProvider.credential(email, password);
+            console.log(credential);
+
+            await firebase.auth().currentUser.linkWithCredential(credential).catch(e => console.error(e));
+        }
         window.location.href = window.location.origin;
     } else {
     }
