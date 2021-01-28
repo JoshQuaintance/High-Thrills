@@ -9,7 +9,7 @@ const glob = require('glob');
 const rootDir = process.cwd(); // Get the root directory
 const publicDir = path.join(rootDir, 'public'); // Get the public directory
 
-app.use('/public', express.static(publicDir)); // To Serve static files
+app.use(express.static(publicDir)); // To Serve static files
 app.use(cors()); // CORS (Cross Origin Resource Sharing) - Let any url be able to do http request to this server
 app.use(cookieParser()); // Cookie Parser - Read Cookies from server
 app.use(express.json()); // JSON Middleware - Parse JSON in server
