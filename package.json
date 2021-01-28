@@ -6,7 +6,7 @@
   "scripts": {
     "live" : "npm i && npm run start",
     "setup": "npm i && npm run build:prefix",
-    "start": "npm run build:scss && concurrently \"node .\"",
+    "start": "node .",
     "dev:start": "concurrently \"npm run dev:scss\" \"nodemon . dev\"",
     "dev:scss": "onchange \"../public/SCSS/*.scss\" -- npm run build:scss",
     "build:scss": "node-sass --recursive --output-style expanded --output ../public/CSS --source-map true --source-map-contents ../public/SCSS --use=autoprefixer"
