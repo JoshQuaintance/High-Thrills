@@ -2,7 +2,7 @@
   "name": "high-thrills-webapp",
   "version": "0.0.2",
   "description": "A Theme Park entertainment website",
-  "main": "index.js",
+  "main": "./server/index.js",
   "scripts": {
     "live" : "npm i && npm run start",
     "setup": "npm i && npm run build:prefix",
