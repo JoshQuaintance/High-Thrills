@@ -184,37 +184,6 @@ body {
   justify-content: space-between;
 }
 
-.login-container form .dots {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 4;
-  position: absolute;
-  top: 12px;
-  width: 35px;
-  height: auto;
-}
-
-.login-container form .dots [id^=dot] {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: black;
-  opacity: 50%;
-  transition: opacity .4s ease-in-out;
-}
-
-.login-container[data-page="1"] #dot1 {
-  opacity: 1;
-  transition: opacity .4s ease-in-out;
-}
-
-.login-container[data-page="2"] #dot2 {
-  opacity: 1;
-  transition: opacity .4s ease-in-out;
-}
-
 .user-details-container {
   padding-top: 5%;
   justify-content: space-around;
@@ -634,5 +603,43 @@ input.incorrect {
 }
 
 /* Medias */
+@media only screen and (max-width: 400px) {
+  #background-img {
+    width: auto;
+    height: 100%;
+  }
+  .login-container {
+    width: 360px;
+  }
+  .login-container #login-wrapper {
+    width: 100%;
+  }
+  .login-container #login-wrapper .input-container {
+    width: 100%;
+    transform: scale(100%);
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .login-container {
+    width: 310px;
+  }
+  .login-container #login-wrapper {
+    width: 100%;
+  }
+  .login-container #login-wrapper .input-container {
+    width: 100%;
+    transform: scale(100%);
+  }
+  .login-container #sign-in-with-provider .auth-container {
+    width: 125px !important;
+  }
+  .login-container #sign-in-with-provider .auth-container[data-auth-provider="google"] {
+    width: 120px !important;
+  }
+  .haveAccount-container {
+    width: 310px;
+  }
+}
 
 /*# sourceMappingURL=login.css.map */

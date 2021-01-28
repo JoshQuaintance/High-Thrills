@@ -91,14 +91,20 @@ module.exports = function dbConnection(app) {
                 });
             }
         } catch (err) {
-            // if there is an error while executing
-            // Log it as an error
-            console.error(err);
+            // If the error is because a user-not-found
+            if (err.code == 'auth/user-not-found') {
+                // Then respond saying the user doesn't exist
+                res.status(404).send('Cannot Find User')
+            } else {
+                // if there is an error while executing
+                // Log it as an error
+                console.error(err);
 
-            // Check if the error is an object, if it is then send a status and message accordingly
-            // otherwise respond back to the client with a server error
-            if (typeof err == 'object') res.status(err.httpStatus || 500).send(err || 'Server Error!');
-            else res.status(500).send('Server Error!');
+                // Check if the error is an object, if it is then send a status and message accordingly
+                // otherwise respond back to the client with a server error
+                if (typeof err == 'object') res.status(err.httpStatus || 500).send(err || 'Server Error!');
+                else res.status(500).send('Server Error!');
+            }
         }
     });
 
