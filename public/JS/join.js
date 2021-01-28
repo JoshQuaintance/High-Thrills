@@ -198,6 +198,31 @@ function signUp() {
     http.send(JSON.stringify(loginEntry));
 }
 
+/**
+ * Gets user location using GeolocationDB API and change location inputs
+ */
+function getUserLocation() {
+    let http = new XMLHttpRequest();
+    let stateInput = document.querySelector('input#state');
+    let cityInput = document.querySelector('input#city');
+
+    http.open('GET', 'https://geolocation-db.com/json/09068b10-55fe-11eb-8939-299a0c3ab5e5');
+
+    http.onreadystatechange = () => {
+        if (http.readyState == 4) {
+            if (http.status == 200) {
+                let parsed = JSON.parse(http.response);
+                stateInput.value = parsed.state;
+                cityInput.value = parsed.city;
+            } else {
+                console.error('Error getting user location');
+            }
+        }
+    };
+
+    http.send();
+}
+
 // Run when the document loads
 document.addEventListener(
     'DOMContentLoaded',
@@ -243,6 +268,21 @@ document.addEventListener(
                     executeAfterTimeout(
                         () => {
                             document.querySelector('.user-details-container').classList.remove('transition-on');
+                            new duDialog(
+                                'Allow Location',
+                                'We will automatically check the location and fill the form, but in order to do so, we have to ask your permission. If you choose to not give permission, you will have to enter in your location manually...',
+                                {
+                                    buttons    : duDialog.OK_CANCEL,
+                                    okText     : 'Allow',
+                                    cancelText : 'Do not Allow',
+                                    callbacks: {
+                                        okClick    : function() {
+                                            getUserLocation();
+                                            this.hide();
+                                        }
+                                    }
+                                }
+                            );
                         },
                         500,
                         'clear-transition-on-class'
@@ -312,10 +352,10 @@ auth.onAuthStateChanged(user => {
     if (user) {
         if (user.emailVerified == false) {
             // send the current user an email verification
-            // firebase.default
-            //     .auth()
-            //     .currentUser.sendEmailVerification({ url: window.location.origin })
-            //     .then(() => {
+            firebase.default
+                .auth()
+                .currentUser.sendEmailVerification({ url: window.location.origin })
+                .then(() => {
             new duDialog(
                 'Verify Email Ownership',
                 `A verification email to prove your ownership of the email was sent to the email address provided. \nPlease verify the ownership of the email address`,
@@ -328,10 +368,10 @@ auth.onAuthStateChanged(user => {
                     }
                 }
             );
-            // })
-            // .catch(err => {
-            //     throw `Error Sending Email Verification: ${err}`;
-            // });
+            })
+            .catch(err => {
+                throw `Error Sending Email Verification: ${err}`;
+            });
             // when the email is successfully sent,
             // Using the dialog library, inform the user that an email to verify the ownership of the email is sent
         } else window.location.href = window.location.origin;

@@ -34,6 +34,8 @@ firebase.auth().onAuthStateChanged(user => {
         cloned.lastChild.setAttribute('href', '/dashboard');
         cloned.lastChild.textContent = 'Dashboard';
         registrations.appendChild(cloned);
+    } else {
+        // window.location.reload();
     }
 });
 

@@ -36,7 +36,6 @@ module.exports = async function createUser(user) {
                 name        : user.name,
                 address     : user.address,
                 displayName : user.displayName || user.email,
-                providers   : user.providerData.map(provider => provider.providerId),
                 createdAt   : serverTimestamp()
             };
 

@@ -326,7 +326,7 @@ body {
   color: grey;
 }
 
-.login-provider section#sign-in-with-provider .auth-container[data-auth-provider=google]:hover {
+.login-provider section#sign-in-with-provider .auth-container[data-auth-provider=google]:hover, .login-provider section#sign-in-with-provider .auth-container[data-auth-provider=google]:focus {
   color: black !important;
   border-color: black;
   filter: brightness(96%);
@@ -338,7 +338,7 @@ body {
   color: white;
 }
 
-.login-provider section#sign-in-with-provider .auth-container[data-auth-provider=facebook]:hover {
+.login-provider section#sign-in-with-provider .auth-container[data-auth-provider=facebook]:hover, .login-provider section#sign-in-with-provider .auth-container[data-auth-provider=facebook]:focus {
   filter: brightness(115%);
 }
 
@@ -383,7 +383,7 @@ body {
   transition: opacity .3s ease-in-out;
 }
 
-.textbox i[class^="im im-eye"]:hover {
+.textbox i[class^="im im-eye"]:hover, .textbox i[class^="im im-eye"]:focus {
   opacity: 65%;
   transition: opacity .3s ease-in-out;
 }
@@ -484,14 +484,14 @@ body {
   transition: all .5s ease;
 }
 
-.btn-cont #signin-btn {
+.btn-cont #signin-btn, .btn-cont #register-btn {
   border-color: #2c974b;
   color: #2c974b;
   margin-right: 0px;
   transition: color, .3s ease, background-color .3s ease;
 }
 
-.btn-cont #signin-btn:hover {
+.btn-cont #signin-btn:hover, .btn-cont #signin-btn:focus, .btn-cont #register-btn:hover, .btn-cont #register-btn:focus {
   background-color: #2c974b;
   color: white;
   transition: color, .3s ease, background-color .3s ease;
@@ -505,8 +505,9 @@ body {
   font-weight: bold;
 }
 
-.btn-cont #back-btn:hover,
-.btn-cont #home-btn:hover {
+.btn-cont #back-btn:hover, .btn-cont #back-btn:focus,
+.btn-cont #home-btn:hover,
+.btn-cont #home-btn:focus {
   background-color: var(--login-object-theme);
   color: white;
 }
@@ -526,7 +527,7 @@ body {
   letter-spacing: 0px;
 }
 
-.forgot-container a:hover {
+.forgot-container a:hover, .forgot-container a:focus {
   text-decoration: underline;
 }
 
@@ -552,8 +553,9 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
-.register-container a:hover,
-.haveAccount-container a:hover {
+.register-container a:hover, .register-container a:focus,
+.haveAccount-container a:hover,
+.haveAccount-container a:focus {
   text-decoration: underline;
 }
 
