@@ -152,38 +152,7 @@ body {
         &.user-details-container {
             justify-content: space-between;
         }
-
-        .dots {
-            @include d-flex(row, space-around, center);
-
-            z-index: 4;
-            position: absolute;
-            top: 12px;
-            width: 35px;
-            height: auto;
-
-            [id^=dot] {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background-color: black;
-                opacity: 50%;
-                transition: opacity .4s ease-in-out;
-            }
-        }
     } // form
-
-    // Automatically choses which dot to highlight according to
-    // what data-page is given
-    &[data-page="1"] #dot1 {
-        opacity: 1;
-        transition: opacity .4s ease-in-out;
-    }
-
-    &[data-page="2"] #dot2 {
-        opacity: 1;
-        transition: opacity .4s ease-in-out;
-    }
 } // .login-container
 
 .user-details-container {
@@ -601,3 +570,51 @@ input.incorrect {
 
 /* Medias */
 
+@media only screen and (max-width: 400px) {
+    #background-img {
+        width: auto;
+        height: 100%;
+    }
+
+    .login-container {
+        width: 360px;
+
+        #login-wrapper {
+            width: 100%;
+
+            .input-container {
+                width: 100%;
+                transform: scale(100%);
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .login-container {
+        width: 310px;
+
+        #login-wrapper {
+            width: 100%;
+
+            .input-container {
+                width: 100%;
+                transform: scale(100%);
+            }
+        }
+
+        #sign-in-with-provider {
+            .auth-container {
+                width: 125px !important;
+
+                &[data-auth-provider="google"] {
+                    width: 120px !important;
+                }
+            }
+        }
+    }
+
+    .haveAccount-container {
+        width: 310px;
+    }
+}

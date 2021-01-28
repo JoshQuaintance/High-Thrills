@@ -51,13 +51,13 @@ function initializePopovers() {
         duration  : 200
     });
 
-    /* When repeated password is wrong */
+    /* When password is wrong */
     // Reference element to target
     let userPassEl = document.querySelector('#user-pass');
 
     // Creates an instance
     tippy(userPassEl, {
-        content   : 'Repeated Password has to be the same as the Password provided!',
+        content   : 'Wrong Password',
         theme     : 'danger',
         placement : 'bottom',
         distance  : 25
@@ -65,6 +65,21 @@ function initializePopovers() {
     let userPassWrong = userPassEl._tippy;
     userPassWrong.popper.style.textAlign = 'center';
     popovers.userPassWrong = userPassWrong;
+    /* - - - */
+
+    /* When email doesn't exist */
+    let userNameEl = document.querySelector('#user-email');
+
+    // Creates instance
+    tippy(userNameEl, {
+        content   : 'Cannot find user with that email.',
+        theme     : 'danger',
+        placement : 'bottom',
+        distance  : 25
+    });
+    let userNameWrong = userNameEl._tippy;
+    userNameWrong.popper.style.textAlign = 'center';
+    popovers.userNameWrong = userNameWrong;
     /* - - - */
 }
 
@@ -93,8 +108,9 @@ function triggerPopover(name) {
  * Labels an input incorrect giving it animations and styles
  * @param {HTMLElement} el Element to label incorrect
  * @param {Boolean} clear To clear the incorrect one or not || false
+ * @param {String} popover Popover name to trigger the popover for that element
  */
-function incorrect(el, clear = false) {
+function incorrect(el, clear = false, popover) {
     const Parent = el.parentElement;
     let elementIcon = Parent.querySelector('.im');
     let elementUnderline = Parent.querySelector('.underline');
@@ -118,8 +134,8 @@ function incorrect(el, clear = false) {
         Parent.style.borderColor = 'red';
         Parent.style.animation = '.82s shake ease-in-out';
 
-        // Show the popover about incorrect repeated password.
-        triggerPopover('passwordWrong');
+        // Show the popover about incorrect input.
+        if (popover) triggerPopover(popover);
 
         // Clears the styles after 6 seconds
         executeAfterTimeout(
@@ -137,9 +153,11 @@ function incorrect(el, clear = false) {
     }
 }
 
+// Variable set if an email setup needs to be executed
 let setupEmail = false;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize popover
     initializePopovers();
 
     document.querySelectorAll('[class^="im im-eye"]').forEach(el => {
@@ -173,9 +191,21 @@ document.addEventListener('DOMContentLoaded', () => {
         http.onreadystatechange = () => {
             if (http.readyState == 4) {
                 if (http.status == 200) {
-                    firebase.auth().signInWithEmailAndPassword(username, password);
-                }
-                if (http.status == 409 && JSON.parse(http.response).action == 'setup-email-login') {
+                    firebase.auth().signInWithEmailAndPassword(username, password).catch(e => {
+                        if (e.code == 'auth/wrong-password')
+                            incorrect(document.querySelector('input#user-pass'), false, 'userPassWrong');
+
+                        if (e.code == 'auth/too-many-requests') {
+                            new duDialog(
+                                'Too Many Requests',
+                                'Access to this account has been temporarily blocked because too many attempted request has failed, please try again later!',
+                                {
+                                    buttons : duDialog.DEFAULT
+                                }
+                            );
+                        }
+                    });
+                } else if (http.status == 409 && JSON.parse(http.response).action == 'setup-email-login') {
                     let res = JSON.parse(http.response);
                     res.data = res.data.map(item => {
                         item = item.replace('.com', '');
@@ -192,6 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     );
 
                     setupEmail = true;
+                } else if (http.status == 404 && http.response == 'Cannot Find User') {
+                    let emailInputEl = document.querySelector('input#user-email');
+
+                    incorrect(emailInputEl, false, 'userNameWrong');
                 }
             }
         };
@@ -234,9 +268,12 @@ auth.onAuthStateChanged(async user => {
             let credential = firebase.auth.EmailAuthProvider.credential(email, password);
             console.log(credential);
 
-            await firebase.auth().currentUser.linkWithCredential(credential).catch(e => console.error(e));
+            await firebase
+                .auth()
+                .currentUser.linkWithCredential(credential)
+                .then(() => (setupEmail = false))
+                .catch(e => console.error(e));
         }
         window.location.href = window.location.origin;
-    } else {
     }
 });

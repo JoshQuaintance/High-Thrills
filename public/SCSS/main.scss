@@ -31,11 +31,15 @@ input:focus {
     position: fixed;
     width: 100%;
     top: 0;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, .8);
     opacity: 1;
     border-bottom: 1px solid #e6e6e6;
     height: 80px;
     transition: height .3s ease, opacity .3s ease;
+
+    img#nav-logo {
+        opacity: 80% !important;
+    }
 
     &.scrolled {
         height: 70px;
@@ -164,14 +168,12 @@ input:focus {
     } // .navbar
 } // .menu
 
-/* LOGIN BOX */
-.login-modal {
-    z-index: 10;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(1.5px);
-    transition: background-color .3s ease-in-out;
-} // .login-modal
+.call-to-action {
+    max-height: 100vh;
+    min-height: 100vh;
+
+    img {
+        height: auto;
+        width: 100%;
+    }
+}
