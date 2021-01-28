@@ -54,6 +54,7 @@ const createUserDB = require('./db-handlers/createUsers');
  * @param {Express.Application} app Express app instance
  */
 module.exports = function dbConnection(app) {
+    console.log('Authentication Routes Running');
     app.post('/availability', async (req, res) => {
         let email = req.body.email;
 

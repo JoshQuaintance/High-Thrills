@@ -13,7 +13,8 @@ app.use(express.static(publicDir)); // To Serve static files
 app.use(cors()); // CORS (Cross Origin Resource Sharing) - Let any url be able to do http request to this server
 app.use(cookieParser()); // Cookie Parser - Read Cookies from server
 app.use(express.json()); // JSON Middleware - Parse JSON in server
-app.listen(3000); // Express to listen in port 3000
+app.listen(process.env.PORT || 3000); // Express to listen in port 3000
+console.log('Route Listener Running');
 
 // Routing for database connection
 require('./auth.js')(app);
@@ -30,6 +31,7 @@ if (process.argv.slice(2).indexOf('dev') > -1) {
 
 // Normal server app
 function server(app) {
+    console.log('Normal Routes Running');
     app.all('/', (req, res, next) => {
         // Anyone can access the API
         res.header('Access-Control-Allow-Origin', '*');

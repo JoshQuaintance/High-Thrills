@@ -44,6 +44,7 @@ function makeNode(file) {
  * @param {Express.Application} app Express app instance
  */
 const injectSocket = app => {
+    console.log('Hot Reload Routes Running');
     // Creates an http server instance using the app (express app)
     const http = require('http').createServer(app);
 
