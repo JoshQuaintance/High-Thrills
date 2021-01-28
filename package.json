@@ -4,7 +4,7 @@
   "description": "A Theme Park entertainment website",
   "main": "./server/index.js",
   "scripts": {
-    "live" : "npm i && npm run start",
+    "live": "npm i && npm run start",
     "setup": "npm i && npm run build:prefix",
     "start": "node .",
     "dev:start": "concurrently \"npm run dev:scss\" \"nodemon . dev\"",
@@ -17,7 +17,6 @@
   "devDependencies": {
     "@types/firebase": "^3.2.1",
     "autoprefixer": "^10.1.0",
-    "cheerio": "^1.0.0-rc.3",
     "concurrently": "^5.3.0",
     "node-sass": "^5.0.0",
     "nodemon": "^2.0.6",
@@ -27,6 +26,7 @@
     "socket.io": "^3.0.4"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
