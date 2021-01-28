@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "setup": "npm i && npm run build:prefix",
-    "start": "npm run build:scss && concurrently \"start http://localhost:3000\" \"node .\"",
-    "dev:start": "concurrently \"npm run dev:scss\" \"nodemon . dev\" \"start http://localhost:3000\"",
+    "start": "npm run build:scss && concurrently \"node .\"",
+    "dev:start": "concurrently \"npm run dev:scss\" \"nodemon . dev\"",
     "dev:scss": "onchange \"../public/SCSS/*.scss\" -- npm run build:scss",
     "build:scss": "node-sass --recursive --output-style expanded --output ../public/CSS --source-map true --source-map-contents ../public/SCSS --use=autoprefixer"
   },
