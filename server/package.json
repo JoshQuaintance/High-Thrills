@@ -4,6 +4,7 @@
   "description": "A Theme Park entertainment website",
   "main": "index.js",
   "scripts": {
+    "live" : "npm i && npm run start",
     "setup": "npm i && npm run build:prefix",
     "start": "npm run build:scss && concurrently \"node .\"",
     "dev:start": "concurrently \"npm run dev:scss\" \"nodemon . dev\"",

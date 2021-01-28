@@ -6,6 +6,6 @@
         "npm" : "6.x"
     },
     "scripts": {
-        "start": "cd server && npm run start"
+        "start": "cd server && npm run live"
     }
 }
