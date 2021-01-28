@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-const rootDir = path.dirname(process.cwd());
+const rootDir = process.cwd();
 const publicDir = path.join(rootDir, 'public');
 
 // Function that creates the script tags

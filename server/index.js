@@ -6,7 +6,7 @@ const path = require('path');
 const injectSocket = require('./hot-reload.js');
 const glob = require('glob');
 
-const rootDir = path.dirname(process.cwd()); // Get the root directory
+const rootDir = process.cwd(); // Get the root directory
 const publicDir = path.join(rootDir, 'public'); // Get the public directory
 
 app.use(express.static(publicDir)); // To Serve static files
