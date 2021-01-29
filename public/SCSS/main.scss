@@ -48,7 +48,7 @@ input:focus {
         border-bottom: none;
 
         #nav-logo {
-            height: 3.0rem !important;
+            height: 70px !important;
             transition: height .3s ease;
         }
 
@@ -58,10 +58,19 @@ input:focus {
         }
     }
 
+    #nav-logo {
+        height: 80px;
+        transition: height .3s ease;
+    }
+
     .navbar {
         @include d-flex(row, center, center);
 
         height: 100%;
+        position: absolute;
+        top: 0;
+        left: 80px;
+        width: calc(100% - 80px);
 
         a {
             text-decoration: none;
@@ -109,11 +118,6 @@ input:focus {
                 }
             } // &::hover
         } // li
-
-        #nav-logo {
-            height: 4.4rem;
-            transition: height .3s ease;
-        }
 
         .navbar-items {
             @include d-flex(row, space-between);
@@ -221,7 +225,6 @@ input:focus {
 
 @media only screen and (max-width: 900px) {
     .menu .navbar {
-        width: 100%;
         justify-content: flex-start;
 
         .navbar-items {
@@ -263,15 +266,57 @@ input:focus {
     .menu .navbar {
         .navbar-items {
             display: none;
+
+            &.show {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                width: 100vh;
+                height: 100vh;
+                background-color: white;
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+
+                .navbar-content {
+                    width: 100% !important;
+                    height: 100% !important;
+                    flex-direction: column !important;
+                }
+
+                .navbar-registration {
+                    width: 100% !important;
+                    height: 100% !important;
+                    flex-direction: column;
+                    justify-content: space-around;
+                }
+
+                a {
+                    font-size: 25px;
+                }
+            }
         }
     }
 
+    .hamburger-container {
+        z-index: 15;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 20px;
+        top: 40px;
+        transform: translateY(-50%);
+    }
+
     .hamburger {
+        position: relative;
         background-color: transparent;
         border: none;
         cursor: pointer;
         display: flex;
         padding: 0;
+        align-items: center;
 
         .line {
             fill: none;
@@ -293,25 +338,25 @@ input:focus {
                 stroke-dasharray: 60 207;
                 stroke-width: 6;
             }
+        }
 
-            &.opened {
-                &.line1 {
-                    stroke-dasharray: 90 207;
-                    stroke-dashoffset: -134;
-                    stroke-width: 6;
-                }
+        &.opened {
+            .line1 {
+                stroke-dasharray: 90 207;
+                stroke-dashoffset: -134;
+                stroke-width: 6;
+            }
 
-                &.line2 {
-                    stroke-dasharray: 1 60;
-                    stroke-dashoffset: -30;
-                    stroke-width: 6;
-                }
+            .line2 {
+                stroke-dasharray: 1 60;
+                stroke-dashoffset: -30;
+                stroke-width: 6;
+            }
 
-                &.line3 {
-                    stroke-dasharray: 90 207;
-                    stroke-dashoffset: -134;
-                    stroke-width: 6;
-                }
+            .line3 {
+                stroke-dasharray: 90 207;
+                stroke-dashoffset: -134;
+                stroke-width: 6;
             }
         }
     }

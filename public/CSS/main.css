@@ -3,6 +3,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+}
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -12,7 +17,8 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 :root {
@@ -27,7 +33,8 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body {
@@ -58,6 +65,7 @@ input:focus {
   opacity: 1;
   border-bottom: 1px solid #e6e6e6;
   height: 80px;
+  -webkit-transition: height .3s ease, opacity .3s ease;
   transition: height .3s ease, opacity .3s ease;
 }
 
@@ -68,26 +76,48 @@ input:focus {
 .menu.scrolled {
   height: 70px;
   opacity: .9;
+  -webkit-transition: height .3s ease, opacity .3s ease;
   transition: height .3s ease, opacity .3s ease;
   border-bottom: none;
 }
 
 .menu.scrolled #nav-logo {
-  height: 3.0rem !important;
+  height: 70px !important;
+  -webkit-transition: height .3s ease;
   transition: height .3s ease;
 }
 
 .menu.scrolled .navbar-items {
   margin-left: 5px !important;
+  -webkit-transition: margin-left .3s ease;
   transition: margin-left .3s ease;
 }
 
+.menu #nav-logo {
+  height: 80px;
+  -webkit-transition: height .3s ease;
+  transition: height .3s ease;
+}
+
 .menu .navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 80px;
+  width: calc(100% - 80px);
 }
 
 .menu .navbar a {
@@ -101,9 +131,15 @@ input:focus {
 }
 
 .menu .navbar li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: relative;
   margin: auto;
   font-size: 1.2rem;
@@ -119,32 +155,38 @@ input:focus {
   width: 0;
   opacity: 0;
   border-radius: 15px;
+  -webkit-transition: opacity .3s ease, width .3s ease;
   transition: opacity .3s ease, width .3s ease;
 }
 
 .menu .navbar li:hover {
   color: var(--main-blue);
+  -webkit-transition: color .3s ease;
   transition: color .3s ease;
 }
 
 .menu .navbar li:hover a::after {
   width: 100%;
   opacity: 1;
+  -webkit-transition: opacity .3s ease, width .3s ease;
   transition: opacity .3s ease, width .3s ease;
 }
 
-.menu .navbar #nav-logo {
-  height: 4.4rem;
-  transition: height .3s ease;
-}
-
 .menu .navbar .navbar-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-left: 25px;
   position: relative;
   width: 100%;
+  -webkit-transition: margin-left .3s ease;
   transition: margin-left .3s ease;
 }
 
@@ -157,16 +199,32 @@ input:focus {
 }
 
 .menu .navbar .navbar-items .navbar-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .menu .navbar .navbar-items .navbar-registration {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: absolute;
   right: 0;
   height: 100%;
@@ -174,10 +232,19 @@ input:focus {
 }
 
 .menu .navbar .navbar-items .navbar-registration #dashboard-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   flex-direction: row;
 }
 
@@ -205,15 +272,26 @@ input:focus {
   z-index: -1;
   height: 100vh;
   width: 100vw;
-  object-fit: cover;
-  filter: brightness(50%) blur(2px);
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-filter: brightness(50%) blur(2px);
+          filter: brightness(50%) blur(2px);
 }
 
 .call-to-action div.title {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100vh;
 }
 
@@ -236,11 +314,13 @@ input:focus {
   color: #cacaca;
   font-family: 'Potta One', cursive;
   cursor: pointer;
+  -webkit-transition: background-color .3s ease-in-out;
   transition: background-color .3s ease-in-out;
 }
 
 .call-to-action div.title .btn:hover, .call-to-action div.title .btn:focus {
   background-color: #2987b6;
+  -webkit-transition: background-color .3s ease-in-out;
   transition: background-color .3s ease-in-out;
 }
 
@@ -250,19 +330,24 @@ input:focus {
 
 @media only screen and (max-width: 900px) {
   .menu .navbar {
-    width: 100%;
-    justify-content: flex-start;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
   }
   .menu .navbar .navbar-items {
-    transform: scale(90%);
+    -webkit-transform: scale(90%);
+            transform: scale(90%);
     margin-left: -15px !important;
     font-size: 18px !important;
     word-break: keep-all;
-    flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
     word-wrap: none;
   }
   .menu .navbar .navbar-items .navbar-registration {
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
   .menu .navbar li a {
     margin: .337em .5em !important;
@@ -271,10 +356,13 @@ input:focus {
 
 @media only screen and (max-width: 769px) {
   .menu .navbar {
-    justify-content: flex-start;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
   }
   .menu .navbar .navbar-items {
-    transform: scale(92%);
+    -webkit-transform: scale(92%);
+            transform: scale(92%);
   }
   .menu .navbar .navbar-items .nav-item a {
     font-size: 16px !important;
@@ -285,17 +373,79 @@ input:focus {
   .menu .navbar .navbar-items {
     display: none;
   }
+  .menu .navbar .navbar-items.show {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+    background-color: white;
+    left: 50%;
+    top: 0;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  .menu .navbar .navbar-items.show .navbar-content {
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+  }
+  .menu .navbar .navbar-items.show .navbar-registration {
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .menu .navbar .navbar-items.show a {
+    font-size: 25px;
+  }
+  .hamburger-container {
+    z-index: 15;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+  }
   .hamburger {
+    position: relative;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
   .hamburger .line {
     fill: none;
     stroke: black;
     stroke-width: 6;
+    -webkit-transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
     transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .hamburger .line.line1 {
@@ -310,21 +460,20 @@ input:focus {
     stroke-dasharray: 60 207;
     stroke-width: 6;
   }
-  .hamburger .line.opened.line1 {
+  .hamburger.opened .line1 {
     stroke-dasharray: 90 207;
     stroke-dashoffset: -134;
     stroke-width: 6;
   }
-  .hamburger .line.opened.line2 {
+  .hamburger.opened .line2 {
     stroke-dasharray: 1 60;
     stroke-dashoffset: -30;
     stroke-width: 6;
   }
-  .hamburger .line.opened.line3 {
+  .hamburger.opened .line3 {
     stroke-dasharray: 90 207;
     stroke-dashoffset: -134;
     stroke-width: 6;
   }
 }
-
 /*# sourceMappingURL=main.css.map */

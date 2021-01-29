@@ -70,6 +70,13 @@ document.addEventListener(
         document.querySelector('#main-action').onclick = () => {
             window.location.href = window.location.origin + '/reservations';
         };
+
+        document.querySelector('.hamburger').onclick = function() {
+            this.classList.toggle('opened');
+            this.setAttribute('aria-expanded', this.classList.contains('opened'));
+
+            document.querySelector('.navbar-items').classList.toggle('show');
+        };
     },
     false
 );
