@@ -137,7 +137,10 @@ function incorrect(el, clear = false) {
     }
 }
 
-async function checkAvailability() {
+/**
+ * Checks for the email availability
+ */
+function checkAvailability() {
     const email = document.querySelector('#user-email').value;
 
     const http = new XMLHttpRequest();
@@ -148,54 +151,6 @@ async function checkAvailability() {
     http.send(JSON.stringify({ email: email }));
 
     return http.status;
-}
-
-function signUp() {
-    const email = document.querySelector('#user-email').value;
-    const password = document.querySelector('#user-pass').value;
-    const firstName = document.querySelector('#first-name').value;
-    const lastName = document.querySelector('#last-name').value;
-    const state = document.querySelector('#state').value;
-    const city = document.querySelector('#city').value;
-    const address = `${city}, ${state}`;
-    const fullName = `${firstName} ${lastName}`;
-
-    let loginEntry = {
-        email,
-        password,
-        fullName,
-        address
-    };
-
-    let http = new XMLHttpRequest();
-    let url = window.location.origin + '/join';
-
-    http.open('POST', url, true);
-
-    http.setRequestHeader('Content-Type', 'application/json');
-
-    http.onreadystatechange = async () => {
-        if (http.readyState == 4) {
-            if (http.status == 409) {
-                console.log(http.response);
-            }
-            if (http.status == 201) {
-                try {
-                    // Automatically signs user in
-                    let user = await firebase.default.auth().signInWithEmailAndPassword(email, password);
-
-                    // // If the response type is an object and the action is to login and verify email
-                    // if (JSON.parse(http.response) && JSON.parse(http.response).action == 'login-and-verify-email') {
-
-                    // }
-                } catch (err) {
-                    console.error(err);
-                } // try catch block
-            } // http status if statement
-        } // readyState if statement
-    };
-
-    http.send(JSON.stringify(loginEntry));
 }
 
 /**
@@ -275,8 +230,8 @@ document.addEventListener(
                                     buttons    : duDialog.OK_CANCEL,
                                     okText     : 'Allow',
                                     cancelText : 'Do not Allow',
-                                    callbacks: {
-                                        okClick    : function() {
+                                    callbacks  : {
+                                        okClick : function() {
                                             getUserLocation();
                                             this.hide();
                                         }
@@ -294,10 +249,58 @@ document.addEventListener(
             );
         };
 
+        // Home Button
+        document.querySelector('#home-btn').onclick = () => (window.location.href = window.location.origin);
+
+        // Second Page Form Handler
         document.querySelector('.user-details-container').onsubmit = function(e) {
             e.preventDefault();
 
-            signUp();
+            const email = document.querySelector('#user-email').value;
+            const password = document.querySelector('#user-pass').value;
+            const firstName = document.querySelector('#first-name').value;
+            const lastName = document.querySelector('#last-name').value;
+            const state = document.querySelector('#state').value;
+            const city = document.querySelector('#city').value;
+            const address = `${city}, ${state}`;
+            const fullName = `${firstName} ${lastName}`;
+
+            let loginEntry = {
+                email,
+                password,
+                fullName,
+                address
+            };
+
+            let http = new XMLHttpRequest();
+            let url = window.location.origin + '/join';
+
+            http.open('POST', url, true);
+
+            http.setRequestHeader('Content-Type', 'application/json');
+
+            http.onreadystatechange = async () => {
+                if (http.readyState == 4) {
+                    if (http.status == 409) {
+                        console.log(http.response);
+                    }
+                    if (http.status == 201) {
+                        try {
+                            // Automatically signs user in
+                            let user = await firebase.default.auth().signInWithEmailAndPassword(email, password);
+
+                            // // If the response type is an object and the action is to login and verify email
+                            // if (JSON.parse(http.response) && JSON.parse(http.response).action == 'login-and-verify-email') {
+
+                            // }
+                        } catch (err) {
+                            console.error(err);
+                        } // try catch block
+                    } // http status if statement
+                } // readyState if statement
+            };
+
+            http.send(JSON.stringify(loginEntry));
         };
 
         // Back button on 2nd page
@@ -356,22 +359,22 @@ auth.onAuthStateChanged(user => {
                 .auth()
                 .currentUser.sendEmailVerification({ url: window.location.origin })
                 .then(() => {
-            new duDialog(
-                'Verify Email Ownership',
-                `A verification email to prove your ownership of the email was sent to the email address provided. \nPlease verify the ownership of the email address`,
-                {
-                    buttons   : duDialog.DEFAULT,
-                    callbacks : {
-                        okClick : function() {
-                            window.location.href = window.location.origin;
+                    new duDialog(
+                        'Verify Email Ownership',
+                        `A verification email to prove your ownership of the email was sent to the email address provided. \nPlease verify the ownership of the email address`,
+                        {
+                            buttons   : duDialog.DEFAULT,
+                            callbacks : {
+                                okClick : function() {
+                                    window.location.href = window.location.origin;
+                                }
+                            }
                         }
-                    }
-                }
-            );
-            })
-            .catch(err => {
-                throw `Error Sending Email Verification: ${err}`;
-            });
+                    );
+                })
+                .catch(err => {
+                    throw `Error Sending Email Verification: ${err}`;
+                });
             // when the email is successfully sent,
             // Using the dialog library, inform the user that an email to verify the ownership of the email is sent
         } else window.location.href = window.location.origin;
