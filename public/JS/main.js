@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged(user => {
             imgEl.setAttribute('src', firebase.auth().currentUser.photoURL);
         } else {
             imgEl = document.createElement('i');
-            imgEl.classList.add('im', 'im-user-circle')
+            imgEl.classList.add('im', 'im-user-circle');
         }
 
         cloned.prepend(imgEl);
@@ -62,4 +62,14 @@ intersectionObs(
         rootMargin : '-90% 0px 0px 0px'
     },
     '#backimg'
+);
+
+document.addEventListener(
+    'DOMContentLoaded',
+    () => {
+        document.querySelector('#main-action').onclick = () => {
+            window.location.href = window.location.origin + '/reservations';
+        };
+    },
+    false
 );
