@@ -3,10 +3,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@300&display=swap");
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 :root {
@@ -16,6 +18,12 @@
   --login-text-theme: #000;
   --link-text-color: #0366d6;
   --success-green: #2c974b;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
 }
 
 @keyframes fadeIn {
@@ -33,6 +41,7 @@
   opacity: 1;
   border-bottom: 1px solid #e6e6e6;
   height: 80px;
+  -webkit-transition: height .3s ease, opacity .3s ease;
   transition: height .3s ease, opacity .3s ease;
 }
 
@@ -43,30 +52,43 @@
 .menu.scrolled {
   height: 70px;
   opacity: .9;
+  -webkit-transition: height .3s ease, opacity .3s ease;
   transition: height .3s ease, opacity .3s ease;
   border-bottom: none;
 }
 
 .menu.scrolled #nav-logo {
   height: 70px !important;
+  -webkit-transition: height .3s ease;
   transition: height .3s ease;
 }
 
 .menu.scrolled .navbar-items {
   margin-left: 5px !important;
+  -webkit-transition: margin-left .3s ease;
   transition: margin-left .3s ease;
 }
 
 .menu #nav-logo {
   height: 80px;
+  -webkit-transition: height .3s ease;
   transition: height .3s ease;
 }
 
 .menu .navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100%;
   position: absolute;
   top: 0;
@@ -85,9 +107,15 @@
 }
 
 .menu .navbar li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: relative;
   margin: auto;
   font-size: 1.2rem;
@@ -103,27 +131,38 @@
   width: 0;
   opacity: 0;
   border-radius: 15px;
+  -webkit-transition: opacity .3s ease, width .3s ease;
   transition: opacity .3s ease, width .3s ease;
 }
 
 .menu .navbar li:hover {
   color: var(--main-blue);
+  -webkit-transition: color .3s ease;
   transition: color .3s ease;
 }
 
 .menu .navbar li:hover a::after {
   width: 100%;
   opacity: 1;
+  -webkit-transition: opacity .3s ease, width .3s ease;
   transition: opacity .3s ease, width .3s ease;
 }
 
 .menu .navbar .navbar-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-left: 25px;
   position: relative;
   width: 100%;
+  -webkit-transition: margin-left .3s ease;
   transition: margin-left .3s ease;
 }
 
@@ -136,16 +175,32 @@
 }
 
 .menu .navbar .navbar-items .navbar-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .menu .navbar .navbar-items .navbar-registration {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   position: absolute;
   right: 0;
   height: 100%;
@@ -153,10 +208,19 @@
 }
 
 .menu .navbar .navbar-items .navbar-registration #dashboard-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   flex-direction: row;
 }
 
@@ -194,7 +258,8 @@
   font-family: 'Jost', cursive;
   padding: 8px 16px;
   text-align: center;
-  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
   cursor: pointer;
 }
 
@@ -208,5 +273,4 @@
   background-color: #e86d4c;
   color: white;
 }
-
 /*# sourceMappingURL=reservations.css.map */
