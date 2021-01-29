@@ -4,6 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@300&display=swap");
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -326,6 +327,68 @@ input:focus {
 
 .hamburger {
   display: none;
+}
+
+.sitemap {
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-family: 'Jost', cursive;
+}
+
+.sitemap a {
+  text-decoration: none;
+  color: white !important;
+}
+
+.sitemap li {
+  margin-top: 20px;
+}
+
+.sitemap p {
+  margin-left: 20px;
+}
+
+.sitemap ul {
+  text-align: center;
+}
+
+.call-to-action div.content.title {
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-left: 35px;
+}
+
+.call-to-action div.content.title .aboutus {
+  text-align: left;
+}
+
+.pLine1 {
+  font-family: 'Londrina Solid', cursive;
+  color: white;
+  font-size: 45px;
+  margin-left: 15%;
+}
+
+.pLine2 {
+  font-family: 'Londrina Solid', cursive;
+  color: white;
+  font-size: 45px;
+  margin-left: 10%;
+}
+
+.pLine3 {
+  font-family: 'Londrina Solid', cursive;
+  color: white;
+  font-size: 45px;
+  margin-left: 20%;
 }
 
 .about {
