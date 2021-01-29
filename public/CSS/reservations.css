@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Langar&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Potta+One&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --text-color-danger: #cb2431;
+  --main-blue: #42a2d1;
+  --login-object-theme: #000;
+  --login-text-theme: #000;
+  --link-text-color: #0366d6;
+  --success-green: #2c974b;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+}
+
+.menu {
+  z-index: 9;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+  border-bottom: 1px solid #e6e6e6;
+  height: 80px;
+  transition: height .3s ease, opacity .3s ease;
+}
+
+.menu img#nav-logo {
+  opacity: 80% !important;
+}
+
+.menu.scrolled {
+  height: 70px;
+  opacity: .9;
+  transition: height .3s ease, opacity .3s ease;
+  border-bottom: none;
+}
+
+.menu.scrolled #nav-logo {
+  height: 70px !important;
+  transition: height .3s ease;
+}
+
+.menu.scrolled .navbar-items {
+  margin-left: 5px !important;
+  transition: margin-left .3s ease;
+}
+
+.menu #nav-logo {
+  height: 80px;
+  transition: height .3s ease;
+}
+
+.menu .navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 80px;
+  width: calc(100% - 80px);
+}
+
+.menu .navbar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.menu .navbar li {
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.menu .navbar li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: auto;
+  font-size: 1.2rem;
+  margin: .667em 1em !important;
+}
+
+.menu .navbar li a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+  border: 2px solid var(--main-blue);
+  width: 0;
+  opacity: 0;
+  border-radius: 15px;
+  transition: opacity .3s ease, width .3s ease;
+}
+
+.menu .navbar li:hover {
+  color: var(--main-blue);
+  transition: color .3s ease;
+}
+
+.menu .navbar li:hover a::after {
+  width: 100%;
+  opacity: 1;
+  transition: opacity .3s ease, width .3s ease;
+}
+
+.menu .navbar .navbar-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 25px;
+  position: relative;
+  width: 100%;
+  transition: margin-left .3s ease;
+}
+
+.menu .navbar .navbar-items a {
+  font-family: 'Jost', cursive;
+  font-weight: bold;
+  font-size: 1.3rem;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+
+.menu .navbar .navbar-items .navbar-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menu .navbar .navbar-items .navbar-registration {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 25%;
+}
+
+.menu .navbar .navbar-items .navbar-registration #dashboard-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.menu .navbar .navbar-items .navbar-registration #dashboard-link a#register-btn {
+  margin-left: 15px;
+}
+
+.menu .navbar .navbar-items .navbar-registration #dashboard-link img {
+  border-radius: 50%;
+  width: 2.2rem;
+  height: auto;
+}
+
+.menu .navbar .navbar-items .navbar-registration #dashboard-link i {
+  font-size: 2.2rem;
+}
+
+.popoverContent {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #42637f;
+  width: 12.5%;
+  text-align: center;
+  font-family: 'Jost', cursive;
+}
+
+.popoverContent h5 {
+  line-height: 50px;
+  font-size: 15px;
+}
+
+.popoverContent button {
+  font-size: 15px;
+  font-family: 'Jost', cursive;
+  padding: 8px 16px;
+  text-align: center;
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+
+.btnReserve {
+  background-color: white;
+  color: black;
+  border: 1px solid #e86d4c;
+}
+
+.btnReserve:hover {
+  background-color: #e86d4c;
+  color: white;
+}
+
+/*# sourceMappingURL=reservations.css.map */
