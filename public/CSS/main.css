@@ -329,6 +329,14 @@ input:focus {
   display: none;
 }
 
+body {
+  position: relative;
+}
+
+* {
+  scroll-behavior: smooth !important;
+}
+
 .sitemap {
   background-color: black;
   color: white;
@@ -337,6 +345,10 @@ input:focus {
   height: -moz-fit-content;
   height: fit-content;
   font-family: 'Jost', cursive;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: fit-content;
 }
 
 .sitemap a {
@@ -346,6 +358,7 @@ input:focus {
 
 .sitemap li {
   margin-top: 20px;
+  list-style: none;
 }
 
 .sitemap p {
@@ -370,6 +383,12 @@ input:focus {
   text-align: left;
 }
 
+#about .inform {
+  color: white;
+  font-family: 'Londrina Solid', cursive;
+  font-size: 35px;
+}
+
 .pLine1 {
   font-family: 'Londrina Solid', cursive;
   color: white;
@@ -389,6 +408,7 @@ input:focus {
   color: white;
   font-size: 45px;
   margin-left: 20%;
+  margin-bottom: 35px;
 }
 
 .about {

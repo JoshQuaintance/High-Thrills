@@ -222,72 +222,82 @@ input:focus {
     display: none;
 }
 
-.sitemap
-{
-    background-color:black;
-    color:white;
-    font-size:20px;
-    height:fit-content;
+body {
+    position: relative;
+}
+
+* {
+    scroll-behavior: smooth !important;
+}
+
+.sitemap {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    height: fit-content;
     font-family: 'Jost', cursive;
-    a{
-       
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: fit-content;
+
+    a {
         text-decoration: none;
-        color:white !important;
+        color: white !important;
     }
-    li{
-        margin-top:20px;
+    li {
+        margin-top: 20px;
+        list-style: none;
     }
-    p{
-        margin-left:20px;
-        
+    p {
+        margin-left: 20px;
     }
-    
 }
-.sitemap ul{
-    text-align:center;
+.sitemap ul {
+    text-align: center;
 }
-.call-to-action
-{
+.call-to-action {
     div.content.title {
         justify-content: center !important;
         align-items: flex-start;
-        margin-left:35px;
-        .aboutus 
-        {
+        margin-left: 35px;
+        .aboutus {
             text-align: left;
         }
     }
 }
 
-.pLine1
-{
+#about {
+    .inform {
+        color: white;
+        font-family: 'Londrina Solid', cursive;
+        font-size: 35px;
+    }
+}
+
+.pLine1 {
     font-family: 'Londrina Solid', cursive;
-    color:white;
+    color: white;
     font-size: 45px;
     margin-left: 15%;
 }
-.pLine2
-{
+.pLine2 {
     font-family: 'Londrina Solid', cursive;
-    color:white;
-    font-size:45px;
-    margin-left:10%;
+    color: white;
+    font-size: 45px;
+    margin-left: 10%;
 }
 
-.pLine3
-{
+.pLine3 {
     font-family: 'Londrina Solid', cursive;
-    color:white;
-    font-size:45px;
-    margin-left:20%;
+    color: white;
+    font-size: 45px;
+    margin-left: 20%;
+    margin-bottom: 35px;
 }
-   
-
 
 .about {
     margin-top: 8%;
-
-   
 }
 
 footer {
@@ -347,7 +357,6 @@ footer {
         .navbar-items {
             display: none;
 
-
             &.show {
                 display: flex !important;
                 flex-direction: column;
@@ -392,7 +401,6 @@ footer {
             }
         }
     }
-
 
     .hamburger-container {
         z-index: 15;
