@@ -1,0 +1,187 @@
+@import './_variables';
+@import './_mixins';
+
+.menu {
+    z-index: 9;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: rgba(255, 255, 255, .8);
+    opacity: 1;
+    border-bottom: 1px solid #e6e6e6;
+    height: 80px;
+    transition: height .3s ease, opacity .3s ease;
+
+    img#nav-logo {
+        opacity: 80% !important;
+    }
+
+    &.scrolled {
+        height: 70px;
+        opacity: .9;
+        transition: height .3s ease, opacity .3s ease;
+        border-bottom: none;
+
+        #nav-logo {
+            height: 70px !important;
+            transition: height .3s ease;
+        }
+
+        .navbar-items {
+            margin-left: 5px !important;
+            transition: margin-left .3s ease;
+        }
+    }
+
+    #nav-logo {
+        height: 80px;
+        transition: height .3s ease;
+    }
+
+    .navbar {
+        @include d-flex(row, center, center);
+
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 80px;
+        width: calc(100% - 80px);
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        li {
+            // position: relative;
+            // display: flex;
+            // align-items: center;
+            // height: auto !important;
+            list-style-type: none;
+            // transition: color .3s ease;
+            cursor: pointer;
+
+            a {
+                @include d-flex('', center, center);
+
+                position: relative;
+                margin: auto;
+                font-size: 1.2rem;
+                margin: .667em 1em !important;
+            }
+
+            a::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                width: 100%;
+                border: 2px solid $main-blue;
+                width: 0;
+                opacity: 0;
+                border-radius: 15px;
+                transition: opacity .3s ease, width .3s ease;
+            }
+
+            &:hover {
+                color: $main-blue;
+                transition: color .3s ease;
+
+                a::after {
+                    width: 100%;
+                    opacity: 1;
+                    transition: opacity .3s ease, width .3s ease;
+                }
+            } // &::hover
+        } // li
+
+        .navbar-items {
+            @include d-flex(row, space-between);
+
+            margin-left: 25px;
+            position: relative;
+            width: 100%;
+            transition: margin-left .3s ease;
+
+            a {
+                font-family: 'Jost', cursive;
+                font-weight: bold;
+                font-size: 1.3rem;
+                font-style: normal;
+                letter-spacing: 1px;
+            }
+
+            .navbar-content {
+                @include d-flex(row, $align: center);
+
+                // width: 75%;
+            }
+
+            .navbar-registration {
+                @include d-flex(row, flex-end, center);
+
+                position: absolute;
+                right: 0;
+                height: 100%;
+                width: 25%;
+
+                #dashboard-link {
+                    @include d-flex(row, center, center);
+                    flex-direction: row;
+
+                    a#register-btn {
+                        margin-left: 15px;
+                    }
+
+                    img {
+                        border-radius: 50%;
+                        width: 2.2rem;
+                        height: auto;
+                    }
+
+                    i {
+                        font-size: 2.2rem;
+                    }
+                }
+            } // .navbar-registration
+        } // .navbar-items
+    } // .navbar
+} // .menu
+
+.popoverContent {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid rgb(66, 99, 127);
+    width: 12.5%;
+    text-align: center;
+    font-family: 'Jost', cursive;
+}
+.popoverContent h5
+{
+    line-height: 50px;
+    font-size: 15px;
+    
+}
+
+.popoverContent button
+{
+    font-size:15px;
+    font-family: 'Jost', cursive;
+    padding: 8px 16px;
+    text-align: center;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+.btnReserve
+{
+    background-color: white;
+    color: black;
+    border: 1px solid rgb(232, 109, 76);
+}
+
+.btnReserve:hover
+{
+    background-color: rgb(232, 109, 76);
+    color: white;
+}
