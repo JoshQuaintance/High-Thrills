@@ -19,6 +19,9 @@ console.log('Route Listener Running || App Running!');
 // Routing for database connection
 require('./auth.js')(app);
 
+// Import firestore into the file
+require('firebase/firestore');
+
 // Checks if there is an extra argument given when running this file
 // If there is and it has the word 'dev' in it then run the socket
 // injection otherwise just run normally
@@ -28,6 +31,8 @@ if (process.argv.slice(2).indexOf('dev') > -1) {
     server(app);
     require('./db-handlers/createUsers.js')();
 }
+
+const getRides = require('./db-handlers/getRides.js');
 
 // Normal server app
 function server(app) {
@@ -43,6 +48,12 @@ function server(app) {
 
     app.get('/', (req, res, next) => {
         res.status(200).sendFile(path.join(publicDir, 'HTML', 'index.html'));
+    });
+
+    app.get('/reserve-spot/:ride', async (req, res) => {
+        let ride = req.params.ride;
+        let data = await getRides(ride);
+        res.status(200).send(data);
     });
 
     app.get('/:file', (req, res, next) => {

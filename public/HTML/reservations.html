@@ -13,7 +13,7 @@
 
   <!-- Main CSS file -->
   <link rel="stylesheet" type="text/css" href="../CSS/main.css">
-  <link rel="stylesheet" type="text/css" href="../CSS/intmap.css">
+  <link rel="stylesheet" type="text/css" href="../CSS/reservations.css">
 
   <!-- Tippy animations and themes - (tooltip library) -->
   <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/translucent.css">
@@ -59,23 +59,23 @@
   <img src="../assets/images/interactiveMap.jpg" usemap="#image-map">
 
   <map name="image-map">
-      <area target="_parent" alt="Boats" title="Boats" href="reservations.html" coords="128,665,159,710,428,632,401,573,269,576,181,609,150,634,126,648" shape="poly">
-      <area target="_parent" alt="RocketShip" title="RocketShip" href="reservations.html" coords="762,526,801,500,900,504,873,561,761,566" shape="poly">
-      <area target="_parent" alt="FerrisWheel" title="FerrisWheel" href="reservations.html" coords="705,476,901,461,888,414,864,400,896,342,932,320,922,300,893,303,869,256,796,232,754,244,701,298,669,315,666,339,698,341,718,400" shape="poly">
-      <area target="_parent" alt="DogsToGo" title="DogsToGo" href="reservations.html" coords="1069,665,995,609,1064,576,1124,585,1136,612,1137,656" shape="poly">
-      <area target="_parent" alt="RollerCoaster" title="RollerCoaster" href="#intMapPopover" coords="1005,392,959,370,949,341,959,329,964,242,1029,241,1122,246,1288,171,1351,149,1373,163,1392,326" shape="poly">
-      <area target="_parent" alt="Swings" title="Swings" href="reservations.html" coords="1090,515,1115,463,1158,426,1215,451,1232,466,1229,529" shape="poly">
-      <area target="_parent" alt="ChuckWagon" title="ChuckWagon" href="reservations.html" coords="1229,415,1224,392,1127,385,1022,388,1019,420,1129,448,1156,424" shape="poly">
-      <area target="_parent" alt="ChickensRUs" title="ChickensRUs" href="reservations.html" coords="1222,688,1132,690,1147,615,1192,617,1200,651,1342,658,1332,687" shape="poly">
-      <area target="_parent" alt="AntiqueCars" title="AntiqueCars" href="reservations.html" coords="1219,583,1251,563,1297,558,1354,573,1390,575,1441,565,1478,568,1536,626,1500,634,1370,653,1270,654,1253,631" shape="poly">
-      <area target="_parent" alt="HauntedCastle" title="HauntedCastle" href="reservations.html" coords="1314,539,1354,519,1549,515,1541,531,1412,541,1412,558,1344,570" shape="poly">
-      <area target="_parent" alt="ParachuteDrop" title="ParachuteDrop" href="reservations.html" coords="1563,331,1499,363,1429,341,1476,310,1495,215,1432,207,1437,166,1661,173,1649,205,1524,215,1515,322" shape="poly">
-      <area target="_parent" alt="SlingShot" title="SlingShot" href="reservations.html" coords="1497,366,1565,331,1624,346,1690,370,1677,395,1573,390" shape="poly">
-      <area target="_parent" alt="CageRide" title="CageRide" href="reservations.html" coords="1266,521,1276,483,1317,459,1432,456,1417,478,1370,485,1373,514,1339,524" shape="poly">
-      <area target="_parent" alt="Train" title="Train" href="reservations.html" coords="1499,473,1563,412,1600,426,1722,434,1692,498,1617,504,1544,492" shape="poly">
-      <area target="_parent" alt="EasyAsPieDiner" title="EasyAsPieDiner" href="reservations.html" coords="1624,554,1675,587,1685,558,1853,549,1846,505,1653,507,1641,531" shape="poly">
-      <area target="_parent" alt="ForeverCool" title="ForeverCool" href="reservations.html" coords="1610,597,1593,573,1626,551,1675,588,1775,597,1783,629,1539,624,1541,600" shape="poly">
-      <area target="_parent" alt="HighThrills" title="HighThrills" href="tickets.html" coords="657,687,620,576,944,571,922,614,910,668" shape="poly">
+      <area target="_parent" alt="Boats" title="Boats" coords="128,665,159,710,428,632,401,573,269,576,181,609,150,634,126,648" shape="poly" id="Boats">
+      <area target="_parent" alt="RocketShip" title="RocketShip" coords="762,526,801,500,900,504,873,561,761,566" shape="poly">
+      <area target="_parent" alt="FerrisWheel" title="FerrisWheel" coords="705,476,901,461,888,414,864,400,896,342,932,320,922,300,893,303,869,256,796,232,754,244,701,298,669,315,666,339,698,341,718,400" shape="poly">
+      <area target="_parent" alt="DogsToGo" title="DogsToGo"  coords="1069,665,995,609,1064,576,1124,585,1136,612,1137,656" shape="poly">
+      <area target="_parent" alt="RollerCoaster" title="RollerCoaster"  coords="1005,392,959,370,949,341,959,329,964,242,1029,241,1122,246,1288,171,1351,149,1373,163,1392,326" shape="poly">
+      <area target="_parent" alt="Swings" title="Swings"  coords="1090,515,1115,463,1158,426,1215,451,1232,466,1229,529" shape="poly">
+      <area target="_parent" alt="ChuckWagon" title="ChuckWagon"  coords="1229,415,1224,392,1127,385,1022,388,1019,420,1129,448,1156,424" shape="poly">
+      <area target="_parent" alt="ChickensRUs" title="ChickensRUs"  coords="1222,688,1132,690,1147,615,1192,617,1200,651,1342,658,1332,687" shape="poly">
+      <area target="_parent" alt="AntiqueCars" title="AntiqueCars"  coords="1219,583,1251,563,1297,558,1354,573,1390,575,1441,565,1478,568,1536,626,1500,634,1370,653,1270,654,1253,631" shape="poly">
+      <area target="_parent" alt="HauntedCastle" title="HauntedCastle"  coords="1314,539,1354,519,1549,515,1541,531,1412,541,1412,558,1344,570" shape="poly">
+      <area target="_parent" alt="ParachuteDrop" title="ParachuteDrop"  coords="1563,331,1499,363,1429,341,1476,310,1495,215,1432,207,1437,166,1661,173,1649,205,1524,215,1515,322" shape="poly">
+      <area target="_parent" alt="SlingShot" title="SlingShot"  coords="1497,366,1565,331,1624,346,1690,370,1677,395,1573,390" shape="poly">
+      <area target="_parent" alt="CageRide" title="CageRide"  coords="1266,521,1276,483,1317,459,1432,456,1417,478,1370,485,1373,514,1339,524" shape="poly">
+      <area target="_parent" alt="Train" title="Train"  coords="1499,473,1563,412,1600,426,1722,434,1692,498,1617,504,1544,492" shape="poly">
+      <area target="_parent" alt="EasyAsPieDiner" title="EasyAsPieDiner"  coords="1624,554,1675,587,1685,558,1853,549,1846,505,1653,507,1641,531" shape="poly">
+      <area target="_parent" alt="ForeverCool" title="ForeverCool"  coords="1610,597,1593,573,1626,551,1675,588,1775,597,1783,629,1539,624,1541,600" shape="poly">
+      <area target="_parent" alt="HighThrills" title="HighThrills" href="/" coords="657,687,620,576,944,571,922,614,910,668" shape="poly">
   </map>
 
   <!--Popover box-->
@@ -92,8 +92,30 @@
   </div>
 
   </div>
-<
 
+<div class="background-dark hide">
+
+</div>
+
+<div class="popover hide">
+  <h1 class="title">Boats</h1>
+  <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam nulla facilisi cras fermentum odio. Leo urna molestie at elementum eu facilisis. </p>
+  <h2 class="price">
+    Price:
+  </h2>
+
+  <div class="textbox ticketAmount clearfix">
+    <i class="im im-coin"></i>
+    <input type="text" required id="ticket-amount-input">
+    <div class="underline"></div>
+    <label>Amount</label>
+  </div>
+
+  <div class="buttons">
+    <input type='button' value="Cancel" class="btn" id="home-btn">
+    <input type='submit' value="Buy Ticket" class="btn" id="buy-ticket">
+  </div>
+</div>
 
 
   <!-- JavaScript Files -->
@@ -102,8 +124,13 @@
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://unpkg.com/tippy.js@6"></script>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script>
+
   <!-- Main JavaScript File -->
-  <script src="../JS/main.js"></script>
+  <script src="../JS/reservations.js"></script>
 
 </body>
 </html>
