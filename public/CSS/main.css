@@ -38,7 +38,6 @@
 }
 
 body {
-  height: 300vh;
   overflow-x: hidden;
 }
 
@@ -328,6 +327,17 @@ input:focus {
   display: none;
 }
 
+.about {
+  margin-top: 8%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.6rem;
+}
+
 @media only screen and (max-width: 900px) {
   .menu .navbar {
     -webkit-box-pack: start;
@@ -370,6 +380,18 @@ input:focus {
 }
 
 @media only screen and (max-width: 620px) {
+  @-webkit-keyframes menu-transition-in {
+    from {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+  }
+  @keyframes menu-transition-in {
+    from {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+  }
   .menu .navbar .navbar-items {
     display: none;
   }
@@ -389,24 +411,48 @@ input:focus {
     top: 0;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-top: 25px;
+    -webkit-animation: menu-transition-in .3s ease-in-out;
+            animation: menu-transition-in .3s ease-in-out;
   }
   .menu .navbar .navbar-items.show .navbar-content {
-    width: 100% !important;
-    height: 100% !important;
+    width: 95% !important;
+    position: absolute;
+    top: 0;
+    height: 50%;
+    left: 0;
     -webkit-box-orient: vertical !important;
     -webkit-box-direction: normal !important;
         -ms-flex-direction: column !important;
             flex-direction: column !important;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
   .menu .navbar .navbar-items.show .navbar-registration {
-    width: 100% !important;
-    height: 100% !important;
+    width: 95% !important;
+    height: auto;
+    bottom: 0;
+    left: 0;
+    height: 50%;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
   }
   .menu .navbar .navbar-items.show a {
     font-size: 25px;
